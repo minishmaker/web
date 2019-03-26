@@ -1,8 +1,21 @@
 <template>
   <section class="container">
-    <h2>
-      Minish Cap Rando! Woo!
-    </h2>
+    <img
+      src="~/assets/Link_MC.png"
+      alt="Picture of Link in Minish Cap"
+      class="page-img" />
+    <div class="sub-container">
+      <h2>
+        Minish Cap Rando! Woo!
+      </h2>
+      <p>
+        This is a work in progress, current there is a
+        <a href="https://github.com/minishmaker/minishmaker">
+          level editor
+        </a>
+        in the works, which will enable a better process for developing the randomizer portion.
+      </p>
+    </div>
   </section>
 </template>
 
@@ -10,7 +23,7 @@
   export default {
     head() {
       return {
-        titleTemplate: 'Home',
+        title: 'Home',
         meta: [
           {
             hid: 'description',
@@ -24,23 +37,9 @@
 </script>
 
 <style lang="scss" scoped>
-  .container {
-    margin: 0 auto;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
+  @import '~@/assets/global-styles';
 
-  .links {
-    padding-top: 15px;
-    display: flex;
-    flex: 100%;
-    align-items: flex-end;
-
-    &:first-child {
-      align-self: flex-start;
-    }
+  .page-img {
+    max-width: 300px;
   }
 </style>

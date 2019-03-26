@@ -1,0 +1,30 @@
+.container {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  flex-flow: row wrap;
+}
+
+.sub-container {
+  flex: 80%;
+}
+
+.page-img {
+  align-self: flex-start;
+  flex: 20%;
+}
+
+a {
+  text-decoration: none;
+  color: green;
+
+  &:hover {
+    color: darkgreen;
+  }
+
+  &:active {
+    color: green;
+  }
+}
+

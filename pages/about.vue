@@ -1,12 +1,18 @@
 <template>
-  <div>
-    Shoutouts to
-    <a
-      href="https://github.com/mikeskyy"
-      target="_blank">
-      Mikesky
-    </a>
-  </div>
+  <section class="container">
+    <img
+      src="~/assets/Ezlo_Cap_Form.png"
+      alt="Picture of Ezlo in Minish Cap"
+      class="page-img" />
+    <div class="sub-container">
+      Shoutouts to
+      <a
+        href="https://github.com/mikeskyy"
+        target="_blank">
+        Mikesky
+      </a>
+    </div>
+  </section>
 </template>
 
 <script>
@@ -26,6 +32,10 @@
   };
 </script>
 
-<style>
+<style lang="scss" scoped>
+  @import '~@/assets/global-styles';
 
+  .page-img {
+    max-width: 224px;
+  }
 </style>

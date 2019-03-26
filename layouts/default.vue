@@ -1,7 +1,14 @@
 <template>
   <div>
     <nav class="links">
-      <nuxt-link to="/">
+      <nuxt-link
+        to="/"
+        class="home-link">
+        <img
+          src="~/assets/Green_Kinstone.png"
+          width="27px"
+          height="27px"
+          alt="Picture of a green kinstone" />
         MinishMaker
       </nuxt-link>
       <nuxt-link to="/rando">
@@ -11,7 +18,9 @@
         About
       </nuxt-link>
     </nav>
-    <nuxt />
+    <transition name="fade">
+      <nuxt />
+    </transition>
   </div>
 </template>
 
@@ -32,52 +41,57 @@
   };
 </script>
 
-<style>
-html {
-  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, 'Helvetica Neue', Arial, sans-serif;
-  font-size: 16px;
-  word-spacing: 1px;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  box-sizing: border-box;
-}
+<style lang="scss">
+  @import '~@/assets/global-styles';
 
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
-  margin: 0;
-}
+  html {
+    font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+      Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 16px;
+    word-spacing: 1px;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+  }
 
-.button--green {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #3b8070;
-  color: #3b8070;
-  text-decoration: none;
-  padding: 10px 30px;
-}
+  *, :before, *:after {
+    box-sizing: border-box;
+    margin: 0;
+  }
 
-.button--green:hover {
-  color: #fff;
-  background-color: #3b8070;
-}
+  .fade-enter-active, .fade-leave-active {
+    transition: all 0.7s;
+  }
 
-.button--grey {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #35495e;
-  color: #35495e;
-  text-decoration: none;
-  padding: 10px 30px;
-  margin-left: 15px;
-}
+  .fade-enter, .fade-leave-to {
+    opacity: 0;
+  }
 
-.button--grey:hover {
-  color: #fff;
-  background-color: #35495e;
-}
+  .home-link {
+    margin-right: 2%;
+    font-size: 22px;
+  }
+
+  .links {
+    font-size: 18px;
+    display: flex;
+    flex: 100%;
+    justify-content: flex-start;
+    align-items: center;
+    background: rgb(225, 225, 225);
+    padding: 12px 8px;
+    margin-bottom: 8px;
+
+    a {
+      margin: 6px;
+      display: flex;
+      // align-items: center;
+
+      &:first-child {
+        justify-self: flex-start;
+      }
+    }
+  }
 </style>

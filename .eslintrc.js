@@ -17,6 +17,7 @@ module.exports = {
     'indent': 'off',
     'semi': ['warn', 'always'],
     'vue/html-closing-bracket-newline': 'off',
+    'vue/html-self-closing': 'off',
     'comma-dangle': ['warn', 'always'],
   },
 };
