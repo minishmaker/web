@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main-container">
     <nav class="links">
       <nuxt-link
         to="/"
@@ -8,7 +8,7 @@
           src="~/assets/Green_Kinstone.png"
           width="27px"
           height="27px"
-          alt="Picture of a green kinstone" />
+          alt="Picture of a green kinstone from Minish Cap" />
         MinishMaker
       </nuxt-link>
       <nuxt-link to="/rando">
@@ -45,6 +45,7 @@
   @import '~@/assets/global-styles';
 
   html {
+    height: 100%;
     font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
       Roboto, 'Helvetica Neue', Arial, sans-serif;
     font-size: 16px;
@@ -54,6 +55,12 @@
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     box-sizing: border-box;
+
+    body {
+      height: 100%;
+      background: linear-gradient(to bottom right, $site-background-color 50%, $site-background-color--transparent),
+        url('~assets/minish_cap_overworld.jpg') no-repeat content-box fixed right bottom;
+    }
   }
 
   *, :before, *:after {
@@ -69,28 +76,41 @@
     opacity: 0;
   }
 
-  .home-link {
-    margin-right: 2%;
-    font-size: 22px;
-  }
-
   .links {
     font-size: 18px;
     display: flex;
     flex: 100%;
     justify-content: flex-start;
     align-items: center;
-    background: rgb(225, 225, 225);
+    background: $nav-background-color;
     padding: 12px 8px;
     margin-bottom: 8px;
 
     a {
-      margin: 6px;
-      display: flex;
-      // align-items: center;
+      padding: 8px;
+      margin: 0px 12px;
 
-      &:first-child {
+      // Home link. Get it? LINK? :D
+      &.home-link {
+        display: flex;
         justify-self: flex-start;
+        margin-right: 2%;
+        font-size: 22px;
+      }
+
+      &:not(:first-child):after {
+        content: '';
+        display: block;
+        border-bottom: 3px solid $link-main-color--hover;
+        width: 0;
+        position: absolute;
+        left: 0;
+        -webkit-transition: 0.4s ease;
+        transition: 0.4s ease;
+      }
+
+      &:not(:first-child):hover:after {
+        width: 100%;
       }
     }
   }

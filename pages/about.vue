@@ -2,7 +2,7 @@
   <section class="container">
     <img
       src="~/assets/Ezlo_Cap_Form.png"
-      alt="Picture of Ezlo in Minish Cap"
+      alt="Picture of Ezlo from Minish Cap"
       class="page-img" />
     <div class="sub-container">
       Shoutouts to

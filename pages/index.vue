@@ -2,7 +2,7 @@
   <section class="container">
     <img
       src="~/assets/Link_MC.png"
-      alt="Picture of Link in Minish Cap"
+      alt="Picture of Link from Minish Cap"
       class="page-img" />
     <div class="sub-container">
       <h2>

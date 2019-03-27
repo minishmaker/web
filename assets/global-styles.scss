@@ -1,3 +1,9 @@
+$nav-background-color: rgb(215, 215, 215);
+$site-background-color: rgb(240, 240, 240);
+$site-background-color--transparent: rgba(240, 240, 240, 0.6);
+$link-main-color: green;
+$link-main-color--hover: darkgreen;
+
 .container {
   margin: 0 auto;
   display: flex;
@@ -7,7 +13,7 @@
 }
 
 .sub-container {
-  flex: 80%;
+  flex: 1 1 0;
 }
 
 .page-img {
@@ -17,14 +23,14 @@
 
 a {
   text-decoration: none;
-  color: green;
+  color: $link-main-color;
+  text-align: center;
+  position: relative;
+  -webkit-transition: color 0.4s ease;
+  transition: color 0.4s ease;
 
   &:hover {
-    color: darkgreen;
-  }
-
-  &:active {
-    color: green;
+    color: $link-main-color--hover;
   }
 }
 
