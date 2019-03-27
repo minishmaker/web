@@ -1,38 +1,45 @@
 <template>
-  <section class="container">
+  <main class="container">
     <img
-      src="~/assets/Forest_Minish.png"
-      alt="Picture of a Forest Minish from Minish Cap"
-      class="page-img" />
-    <div class="sub-container">
+      src="~/assets/Princess_Zelda.png"
+      alt="Picture of Princess Zelda from Minish Cap" />
+    <section class="sub-container">
       <span>
         Rando Page! Someday this will hooked up c:
       </span>
-      <form
-        method="post"
-        enctype="multipart/form-data"
+      <!-- <form
+        ref="romInputForm"
+        class="rom-upload"
         @submit.prevent="uploadTest">
-        <div class="rom-upload">
-          <label for="rom">
-            Upload your Minish Cap .gba file
-          </label>
-          <input
-            ref="romInput"
-            name="rom"
-            type="file" />
-        </div>
-        <div class="rom-submit">
-          <button type="submit">
-            submit
-          </button>
-        </div>
+        <label for="rom">
+          Upload your Minish Cap .gba file
+        </label>
+        <input
+          ref="romInput"
+          required
+          name="romFile"
+          type="file" />
+        <input
+          class="rom-submit"
+          type="submit"
+          value="Submit" />
       </form>
-    </div>
-  </section>
+      <span v-if="uploadOk">
+        Upload ok! :D
+      </span>
+      <span v-if="uploadFail">
+        Upload fail... :c
+      </span> -->
+    </section>
+  </main>
 </template>
 
 <script>
-  import axios from 'axios';
+  const headerData = {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  };
 
   export default {
     head() {
@@ -48,9 +55,41 @@
       };
     },
 
+    data() {
+      return {
+        uploadOk: false,
+        uploadFail: false,
+      };
+    },
+
+    mounted() {
+      this.checkTest();
+    },
+
     methods: {
       async uploadTest() {
-        await axios.post('api/upload_rom', this.$refs.romInput.files);
+        const file = this.$refs.romInput.files[0];
+        const formData = new FormData();
+        formData.append('rom', file);
+        const response = await this.$axios.$post('api/upload_rom', formData, headerData);
+        if (response) {
+          this.uploadOk = true;
+          await this.$localForage.setItem('rom', file);
+          this.$refs.romInputForm.reset();
+        } else {
+          this.uploadFail = true;
+        }
+        setTimeout(() => {
+          this.uploadOk = false;
+          this.uploadFail = false;
+        }, 2500);
+      },
+      async checkTest() {
+        const file = await this.$localForage.getItem('rom');
+        console.log(file);
+        const formData = new FormData();
+        formData.append('rom', file);
+        await this.$axios.$post('api/check_rom', formData, headerData);
       },
     },
   };

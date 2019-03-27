@@ -14,6 +14,12 @@
       <nuxt-link to="/rando">
         Generate Rom
       </nuxt-link>
+      <nuxt-link to="/github">
+        Github
+      </nuxt-link>
+      <nuxt-link to="/discord">
+        Discord
+      </nuxt-link>
       <nuxt-link to="/about">
         About
       </nuxt-link>
@@ -88,7 +94,7 @@
 
     a {
       padding: 8px;
-      margin: 0px 12px;
+      margin: 0px 4px;
 
       // Home link. Get it? LINK? :D
       &.home-link {

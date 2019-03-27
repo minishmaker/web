@@ -33,12 +33,24 @@ module.exports = {
   plugins: [
   ],
 
+  serverMiddleware: [
+    '~/server/api.js',
+  ],
+
   /*
   ** Nuxt.js modules
   */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    [
+      '@nuxtjs/localforage', {
+        name        : 'MinishMaker',
+        version     : 1.0,
+        storeName   : 'roms', // Should be alphanumeric, with underscores.
+        description : 'storing user roms'
+      }
+    ],
   ],
   /*
   ** Axios module configuration

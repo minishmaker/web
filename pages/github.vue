@@ -1,14 +1,14 @@
 <template>
   <main class="container">
     <img
-      src="~/assets/Ezlo_Cap_Form.png"
-      alt="Picture of Ezlo from Minish Cap" />
+      src="~/assets/Vaati_Hylian_Form.png"
+      alt="Picture of Vaati from Minish Cap" />
     <section class="sub-container">
-      Shoutouts to
+      All source code for the website, level editor, and randomizer can be
       <a
-        href="https://github.com/mikeskyy"
+        href="https://github.com/minishmaker"
         target="_blank">
-        Mikesky
+        found here
       </a>
     </section>
   </main>
@@ -18,12 +18,12 @@
   export default {
     head() {
       return {
-        title: 'About',
+        title: 'Github',
         meta: [
           {
             hid: 'description',
             name: 'description',
-            content: 'Shoutouts to the community for making this possible!',
+            description: 'Information about the github repositories that make up this project',
           },
         ],
       };
@@ -35,6 +35,6 @@
   @import '~@/assets/global-styles';
 
   .page-img {
-    max-width: 224px;
+    max-width: 230px;
   }
 </style>

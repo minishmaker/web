@@ -1,15 +1,16 @@
 <template>
   <main class="container">
     <img
-      src="~/assets/Ezlo_Cap_Form.png"
-      alt="Picture of Ezlo from Minish Cap" />
+      src="~/assets/Forest_Minish.png"
+      alt="Picture of a Forest Minish from Minish Cap" />
     <section class="sub-container">
-      Shoutouts to
+      Join our
       <a
-        href="https://github.com/mikeskyy"
+        href="https://discord.gg/ndFuWbV"
         target="_blank">
-        Mikesky
+        discord server
       </a>
+      to report bugs, talk about logic, or just talk with the community.
     </section>
   </main>
 </template>
@@ -18,12 +19,12 @@
   export default {
     head() {
       return {
-        title: 'About',
+        title: 'Discord',
         meta: [
           {
             hid: 'description',
             name: 'description',
-            content: 'Shoutouts to the community for making this possible!',
+            description: 'Join the discord to report bugs, talk about the project, and more!',
           },
         ],
       };
@@ -35,6 +36,6 @@
   @import '~@/assets/global-styles';
 
   .page-img {
-    max-width: 224px;
+    max-width: 230px;
   }
 </style>

@@ -1,10 +1,9 @@
 <template>
-  <section class="container">
+  <main class="container">
     <img
       src="~/assets/Link_MC.png"
-      alt="Picture of Link from Minish Cap"
-      class="page-img" />
-    <div class="sub-container">
+      alt="Picture of Link from Minish Cap" />
+    <section class="sub-container">
       <h2>
         Minish Cap Rando! Woo!
       </h2>
@@ -15,8 +14,8 @@
         </a>
         in the works, which will enable a better process for developing the randomizer portion.
       </p>
-    </div>
-  </section>
+    </section>
+  </main>
 </template>
 
 <script>
@@ -38,8 +37,4 @@
 
 <style lang="scss" scoped>
   @import '~@/assets/global-styles';
-
-  .page-img {
-    max-width: 300px;
-  }
 </style>
