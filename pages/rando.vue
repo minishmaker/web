@@ -24,6 +24,9 @@
           type="submit"
           value="Submit" />
       </form>
+      <span v-if="loading">
+        Loading...
+      </span>
       <span v-if="uploadOk">
         Upload ok! :D
       </span>
@@ -59,26 +62,31 @@
       return {
         uploadOk: false,
         uploadFail: false,
+        loading: false,
       };
     },
 
     mounted() {
-      this.checkTest();
+      // this.checkTest();
     },
 
     methods: {
       async uploadTest() {
+        this.loading = true;
         const file = this.$refs.romInput.files[0];
         const formData = new FormData();
         formData.append('rom', file);
-        const response = await this.$axios.$post('api/upload_rom', formData, headerData);
-        if (response) {
+        try {
+          await this.$axios.$post('api/upload_rom', formData, headerData);
           this.uploadOk = true;
           await this.$localForage.setItem('rom', file);
           this.$refs.romInputForm.reset();
-        } else {
+        } catch (e) {
+          console.error(e);
           this.uploadFail = true;
         }
+        this.loading = false;
+
         setTimeout(() => {
           this.uploadOk = false;
           this.uploadFail = false;

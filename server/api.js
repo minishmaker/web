@@ -1,7 +1,16 @@
 const express = require('express');
+const fileUpload = require('express-fileupload');
+const apigClientFactory = require('aws-api-gateway-client').default;
+
 const app = express();
 
-const fileUpload = require('express-fileupload');
+const config = {
+  invokeUrl: process.env.AWS_API_URL,
+  accessKey: process.env.AWS_ACCESS_KEY_ID,
+  secretKey: process.env.AWS_SECRET_ACCESS_KEY,
+  region:    process.env.AWS_API_REGION,
+};
+const randoApi = apigClientFactory.newClient(config);
 
 const fileConfig = fileUpload({
   limits: { fileSize: 20 * 1024 * 1024 },
@@ -27,7 +36,8 @@ app.post('/api/upload_rom', fileConfig, async (req, res, next) => {
   try {
     console.log(req.files);
 
-    /* run lambda here */
+    const { data } = await randoApi.invokeApi({}, process.env.AWS_API_PATH, 'POST', {}, { rom: req.files.rom });
+    console.log(data);
   
     const romOk = !!req.files.rom;
     res.status(200).send(romOk);
