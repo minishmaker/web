@@ -5,7 +5,7 @@
       alt="Picture of Link from Minish Cap" />
     <section class="sub-container">
       <h2>
-        Minish Cap Rando! Woo!
+        {{ $t('index.greeting') }}
       </h2>
       <p>
         This is a work in progress, current there is a
@@ -36,5 +36,4 @@
 </script>
 
 <style lang="scss" scoped>
-  @import '~@/assets/global-styles';
 </style>

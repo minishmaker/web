@@ -1,5 +1,5 @@
 const pkg = require('./package');
-import messages, { locales } from './locales';
+const i18n = require('./locales');
 
 module.exports = {
   mode: 'universal',
@@ -56,11 +56,11 @@ module.exports = {
   ],
 
   i18n: {
-    locales,
+    locales: i18n.locales,
     defaultLocale: 'en',
     vueI18n: {
       fallbackLocale: 'en',
-      messages,
+      messages: i18n.messages,
     },
   },
   /*

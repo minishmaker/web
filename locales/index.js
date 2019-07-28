@@ -1,7 +1,6 @@
-import en from './en-us';
-
-export const locales = ['en'];
-
-export default {
-  en,
+module.exports = {
+  messages: {
+    en: require('./en-us.js'),
+  },
+  locales: ['en'],
 };

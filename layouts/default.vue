@@ -2,7 +2,7 @@
   <div>
     <nav class="links">
       <nuxt-link
-        to="/"
+        :to="localePath('index')"
         class="home-link">
         <img
           src="~/assets/Green_Kinstone.png"
@@ -11,17 +11,17 @@
           alt="Picture of a green kinstone from Minish Cap" />
         MinishMaker
       </nuxt-link>
-      <nuxt-link to="/rando">
-        Generate Rom
+      <nuxt-link :to="localePath('rando')">
+        {{ $t('nav.links.rando') }}
       </nuxt-link>
-      <nuxt-link to="/github">
-        Github
+      <nuxt-link :to="localePath('github')">
+        {{ $t('nav.links.github') }}
       </nuxt-link>
-      <nuxt-link to="/discord">
-        Discord
+      <nuxt-link :to="localePath('discord')">
+        {{ $t('nav.links.discord') }}
       </nuxt-link>
-      <nuxt-link to="/about">
-        About
+      <nuxt-link :to="localePath('about')">
+        {{ $t('nav.links.about') }}
       </nuxt-link>
     </nav>
     <div class="main-container">
@@ -66,7 +66,7 @@
 
     body {
       height: 100%;
-      background: linear-gradient(to bottom right, $site-background-color 50%, $site-background-color--transparent),
+      background: linear-gradient(to bottom right, $site-background-color 52%, $site-background-color--transparent),
         url('~assets/minish_cap_overworld.jpg') no-repeat content-box fixed right bottom;
     }
   }
@@ -117,6 +117,7 @@
     background: $nav-background-color;
     padding: 12px 8px;
     margin-bottom: 8px;
+    border-bottom: 1px solid $nav-border-color;
 
     a {
       padding: 8px;

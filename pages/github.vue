@@ -32,8 +32,6 @@
 </script>
 
 <style lang="scss" scoped>
-  @import '~@/assets/global-styles';
-
   .page-img {
     max-width: 230px;
   }
