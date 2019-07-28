@@ -1,4 +1,5 @@
-const pkg = require('./package')
+const pkg = require('./package');
+import messages, { locales } from './locales';
 
 module.exports = {
   mode: 'universal',
@@ -9,11 +10,11 @@ module.exports = {
   head: {
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' }
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+    ],
   },
 
   /*
@@ -43,15 +44,25 @@ module.exports = {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
+    'nuxt-i18n',
     [
       '@nuxtjs/localforage', {
         name        : 'MinishMaker',
         version     : 1.0,
         storeName   : 'roms', // Should be alphanumeric, with underscores.
-        description : 'storing user roms'
-      }
+        description : 'storing user roms',
+      },
     ],
   ],
+
+  i18n: {
+    locales,
+    defaultLocale: 'en',
+    vueI18n: {
+      fallbackLocale: 'en',
+      messages,
+    },
+  },
   /*
   ** Axios module configuration
   */
@@ -74,9 +85,9 @@ module.exports = {
           enforce: 'pre',
           test: /\.(js|vue)$/,
           loader: 'eslint-loader',
-          exclude: /(node_modules)/
-        })
+          exclude: /(node_modules)/,
+        });
       }
-    }
-  }
-}
+    },
+  },
+};

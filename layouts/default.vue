@@ -1,5 +1,5 @@
 <template>
-  <div class="main-container">
+  <div>
     <nav class="links">
       <nuxt-link
         to="/"
@@ -24,9 +24,11 @@
         About
       </nuxt-link>
     </nav>
-    <transition name="fade">
-      <nuxt />
-    </transition>
+    <div class="main-container">
+      <transition name="fade">
+        <nuxt />
+      </transition>
+    </div>
   </div>
 </template>
 
@@ -72,6 +74,30 @@
   *, :before, *:after {
     box-sizing: border-box;
     margin: 0;
+  }
+
+  .main-container {
+    margin: auto;
+
+    @media only screen and (max-width: 600px) {
+      width: 98%;
+    }
+
+    @media only screen and (min-width: 600px) {
+      width: 98%;
+    }
+
+    @media only screen and (min-width: 992px) {
+      width: 800px;
+    }
+
+    @media only screen and (min-width: 1200px) {
+      width: 1000px;
+    }
+
+    @media only screen and (min-width: 1600px) {
+      width: 1440px;
+    }
   }
 
   .fade-enter-active, .fade-leave-active {
