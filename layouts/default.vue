@@ -1,38 +1,49 @@
 <template>
   <div>
-    <nav class="links">
-      <nuxt-link
-        :to="localePath('index')"
-        class="home-link">
-        <img
-          src="~/assets/Green_Kinstone.png"
-          width="27px"
-          height="27px"
-          alt="Picture of a green kinstone from Minish Cap" />
-        MinishMaker
-      </nuxt-link>
-      <nuxt-link :to="localePath('rando')">
-        {{ $t('nav.links.rando') }}
-      </nuxt-link>
-      <nuxt-link :to="localePath('github')">
-        {{ $t('nav.links.github') }}
-      </nuxt-link>
-      <nuxt-link :to="localePath('discord')">
-        {{ $t('nav.links.discord') }}
-      </nuxt-link>
-      <nuxt-link :to="localePath('about')">
-        {{ $t('nav.links.about') }}
-      </nuxt-link>
+    <nav class="nav-links">
+      <div class="link-container">
+        <nuxt-link
+          :to="localePath('index')"
+          class="home-link">
+          <img
+            src="~/assets/Green_Kinstone.png"
+            width="27px"
+            height="27px"
+            alt="Picture of a green kinstone from Minish Cap" />
+          MinishMaker
+        </nuxt-link>
+        <nuxt-link :to="localePath('rando')">
+          {{ $t('nav.links.rando') }}
+        </nuxt-link>
+        <nuxt-link :to="localePath('github')">
+          {{ $t('nav.links.github') }}
+        </nuxt-link>
+        <nuxt-link :to="localePath('discord')">
+          {{ $t('nav.links.discord') }}
+        </nuxt-link>
+        <nuxt-link :to="localePath('about')">
+          {{ $t('nav.links.about') }}
+        </nuxt-link>
+      </div>
+
+      <div class="locales">
+        <nuxt-link :to="switchLocalePath('en')">
+          <span class="flag-icon flag-icon-us" />
+          English
+        </nuxt-link>
+      </div>
     </nav>
-    <div class="main-container">
+    <main class="main-container">
       <transition name="fade">
         <nuxt />
       </transition>
-    </div>
+    </main>
   </div>
 </template>
 
 <script>
+  import 'flag-icon-css/css/flag-icon.min.css';
+
   export default {
     head() {
       return {
@@ -108,30 +119,40 @@
     opacity: 0;
   }
 
-  .links {
+  .nav-links {
     font-size: 18px;
     display: flex;
-    flex: 100%;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
     background: $nav-background-color;
     padding: 12px 8px;
     margin-bottom: 8px;
     border-bottom: 1px solid $nav-border-color;
 
+    .link-container {
+      flex: auto;
+    }
+
+    .locales {
+      font-size: 16px;
+    }
+
     a {
-      padding: 8px;
+      padding: 4px;
       margin: 0px 4px;
 
       // Home link. Get it? LINK? :D
       &.home-link {
-        display: flex;
-        justify-self: flex-start;
-        margin-right: 2%;
+        border-right: 1px solid $nav-border-color--light;
+        padding-right: 12px;
         font-size: 22px;
+
+        & > * {
+          vertical-align: text-bottom;
+        }
       }
 
-      &:not(:first-child):after {
+      &:not(.home-link):after {
         content: '';
         display: block;
         border-bottom: 3px solid $link-main-color--hover;
@@ -142,7 +163,7 @@
         transition: 0.4s ease;
       }
 
-      &:not(:first-child):hover:after {
+      &:not(.home-link):hover:after {
         width: 100%;
       }
     }
