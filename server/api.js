@@ -3,8 +3,8 @@
 const express = require('express');
 const fileUpload = require('express-fileupload');
 const apigClientFactory = require('aws-api-gateway-client').default;
-
 const app = express();
+require('dotenv').config();
 
 const config = {
   invokeUrl: process.env.AWS_API_URL,
