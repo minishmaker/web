@@ -4,12 +4,7 @@
       src="~/assets/Ezlo_Cap_Form.png"
       alt="Picture of Ezlo from Minish Cap" />
     <section class="sub-container">
-      Shoutouts to
-      <a
-        href="https://github.com/mikeskyy"
-        target="_blank">
-        Mikesky
-      </a>
+      Shoutouts to all current developers and testers for making this possible! (Full credits to come)
     </section>
   </main>
 </template>

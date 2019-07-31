@@ -10,7 +10,7 @@
         target="_blank">
         discord server
       </a>
-      to report bugs, talk about logic, or just talk with the community.
+      to report bugs, discuss logic, or just talk with the community.
     </section>
   </main>
 </template>

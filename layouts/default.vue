@@ -24,6 +24,9 @@
         <nuxt-link :to="localePath('about')">
           {{ $t('nav.links.about') }}
         </nuxt-link>
+        <nuxt-link :to="localePath('tracker')">
+          {{ $t('nav.links.tracker') }}
+        </nuxt-link>
       </div>
 
       <div class="locales">
@@ -88,6 +91,7 @@
   }
 
   .main-container {
+    height: 100%;
     margin: auto;
 
     @media only screen and (max-width: 600px) {

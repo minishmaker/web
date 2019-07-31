@@ -26,8 +26,10 @@ app.post('/api/check_rom', fileConfig, async (req, res, next) => {
   
     /* run lambda here */
   
-    const romOk = !!req.files.rom;
-    res.status(200).send(romOk);
+    if (req.files) {
+      const romOk = !!req.files.rom;
+      res.status(200).send(romOk);
+    }
   } catch (e) {
     console.error(e);
     res.sendStatus(500);
@@ -38,11 +40,13 @@ app.post('/api/upload_rom', fileConfig, async (req, res, next) => {
   try {
     console.log(req.files);
 
-    const { data } = await randoApi.invokeApi({}, process.env.AWS_API_PATH, 'POST', {}, { rom: req.files.rom });
-    console.log(data);
-  
-    const romOk = !!req.files.rom;
-    res.status(200).send(romOk);
+    if (req.files) {
+      const { data } = await randoApi.invokeApi({}, process.env.AWS_API_PATH, 'POST', {}, { rom: req.files.rom });
+      console.log(data);
+    
+      const romOk = !!req.files.rom;
+      res.status(200).send(romOk);
+    }
   } catch (e) {
     console.error(e);
     res.sendStatus(500);

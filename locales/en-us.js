@@ -5,6 +5,7 @@ module.exports = {
       github: 'Github',
       discord: 'Discord',
       about: 'About',
+      tracker: 'Tracker',
     },
   },
   index: {

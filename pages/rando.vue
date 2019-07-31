@@ -5,7 +5,7 @@
       alt="Picture of Princess Zelda from Minish Cap" />
     <section class="sub-container">
       <span>
-        Rando Page! Someday this will hooked up c:
+        Rando seed generation page! Someday this will hooked up c:
       </span>
       <!-- <form
         ref="romInputForm"
