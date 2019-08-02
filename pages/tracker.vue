@@ -273,6 +273,19 @@
   };
 
   export default {
+    head() {
+      return {
+        title: 'Tracker',
+        meta: [
+          {
+            hid: 'description',
+            name: 'description',
+            description: 'Track your progress through a generated playthrough',
+          },
+        ],
+      };
+    },
+
     name: 'Tracker',
 
     // If a variable has the word 'has' in it, it is a true/false variable
@@ -745,23 +758,18 @@
 </script>
 
 <style lang="scss" scoped>
-  .scale-buttons {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 200px;
-  }
-
   .tracker {
     display: flex;
     margin-top: 150px;
-    transform: scale(1.5);
     justify-content: center;
 
     table {
-      background-color:#9B855B;
+      background-color: #A47312;
 
       td {
         text-align: center;
+        width: 48px;
+        height: 48px;
       }
     }
 
