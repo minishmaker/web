@@ -1,7 +1,16 @@
 <template>
   <div>
-    <div ref="tracker" class="tracker">
-      <table class="table table-centered">
+    <div class="context-buttons">
+      <button @click.prevent="simple = !simple">
+        {{ simple ? 'Show full tracker' : 'Show simple tracker' }}
+      </button>
+      <button @click.self="showColorPicker = !showColorPicker">
+        {{ showColorPicker ? 'Hide color picker' : 'Show color picker' }}
+        <chrome-color-picker v-show="showColorPicker" :value="backgroundColor" @input="updateBackgroundColor" />
+      </button>
+    </div>
+    <div class="tracker">
+      <table :style="{ backgroundColor }" class="table table-centered">
         <tr>
           <th colspan="8">
             Tracker made by cubesolver111
@@ -14,9 +23,9 @@
             <td><img ref="cane" :src="require(`../assets/item_sprites/${caneImage}`)" @click="changeCane()" /></td>
             <td><img ref="rang" :src="require(`../assets/item_sprites/${rangImage}`)" @click="changeRang()" /></td>
             <td><img ref="wallet" :src="require(`../assets/item_sprites/${walletImage}`)" @click="changeWallet()" /></td>
-            <td>DWS</td>
-            <td><img ref="dwsBig" :src="require(`../assets/item_sprites/${bigKeyImage}`)" @click="changeBigKey('dwsBig')" /></td>
-            <td><img ref="dwsSmall" :src="require(`../assets/item_sprites/${dwsSmallKeyImage}`)" @click="changeSmallKey('dwsSmall')" /></td>
+            <td v-show="!simple">DWS</td>
+            <td v-show="!simple"><img ref="dwsBig" :src="require(`../assets/item_sprites/${bigKeyImage}`)" @click="changeBigKey('dwsBig')" /></td>
+            <td v-show="!simple"><img ref="dwsSmall" :src="require(`../assets/item_sprites/${dwsSmallKeyImage}`)" @click="changeSmallKey('dwsSmall')" /></td>
           </tr>
           <tr>
             <td><img ref="shields" :src="require(`../assets/item_sprites/${shieldsImage}`)" @click="changeShield()" /></td>
@@ -24,9 +33,9 @@
             <td><img ref="lantern" :src="require(`../assets/item_sprites/${lanternImage}`)" @click="changeLantern()" /></td>
             <td><img ref="bombs" :src="require(`../assets/item_sprites/${bombsImage}`)" @click="changeBombs()" /></td>
             <td><img ref="goldWilds" :src="require(`../assets/item_sprites/Kinstones/${stonesWildsImage}`)" @click="changeStonesWilds()" /></td>
-            <td>COF</td>
-            <td><img ref="cofBig" :src="require(`../assets/item_sprites/${bigKeyImage}`)" @click="changeBigKey('cofBig')" /></td>
-            <td><img ref="cofSmall" :src="require(`../assets/item_sprites/${cofSmallKeyImage}`)" @click="changeSmallKey('cofSmall')" /></td>
+            <td v-show="!simple">COF</td>
+            <td v-show="!simple"><img ref="cofBig" :src="require(`../assets/item_sprites/${bigKeyImage}`)" @click="changeBigKey('cofBig')" /></td>
+            <td v-show="!simple"><img ref="cofSmall" :src="require(`../assets/item_sprites/${cofSmallKeyImage}`)" @click="changeSmallKey('cofSmall')" /></td>
           </tr>
           <tr>
             <td><img ref="boots" :src="require(`../assets/item_sprites/${bootsImage}`)" @click="changeBoots()" /></td>
@@ -34,9 +43,9 @@
             <td><img ref="ocarina" :src="require(`../assets/item_sprites/${fluteImage}`)" @click="changeFlute()" /></td>
             <td><img ref="bow" :src="require(`../assets/item_sprites/${bowImage}`)" @click="changeBow()" /></td>
             <td><img ref="goldClouds" :src="require(`../assets/item_sprites/Kinstones/${stonesCloudsImage}`)" @click="changeStonesClouds()" /></td>
-            <td>FOW</td>
-            <td><img ref="fowBig" :src="require(`../assets/item_sprites/${bigKeyImage}`)" @click="changeBigKey('fowBig')" /></td>
-            <td><img ref="fowSmall" :src="require(`../assets/item_sprites/${fowSmallKeyImage}`)" @click="changeSmallKey('fowSmall')" /></td>
+            <td v-show="!simple">FOW</td>
+            <td v-show="!simple"><img ref="fowBig" :src="require(`../assets/item_sprites/${bigKeyImage}`)" @click="changeBigKey('fowBig')" /></td>
+            <td v-show="!simple"><img ref="fowSmall" :src="require(`../assets/item_sprites/${fowSmallKeyImage}`)" @click="changeSmallKey('fowSmall')" /></td>
           </tr>
           <tr>
             <td><img ref="bottles" :src="require(`../assets/item_sprites/${bottlesImage}`)" @click="changeBottles()" /></td>
@@ -44,9 +53,9 @@
             <td><img ref="mushroom" :src="require(`../assets/item_sprites/${mushroomImage}`)" @click="changeMushroom()" /></td>
             <td><img ref="llrKey" :src="require(`../assets/item_sprites/${llrImage}`)" @click="changeLlrKey()" /></td>
             <td><img ref="goldFalls" :src="require(`../assets/item_sprites/Kinstones/${stonesFallsImage}`)" @click="changeStonesFalls()" /></td>
-            <td>TOD</td>
-            <td><img ref="todBig" :src="require(`../assets/item_sprites/${bigKeyImage}`)" @click="changeBigKey('todBig')" /></td>
-            <td><img ref="todSmall" :src="require(`../assets/item_sprites/${todSmallKeyImage}`)" @click="changeSmallKey('todSmall')" /></td>
+            <td v-show="!simple">TOD</td>
+            <td v-show="!simple"><img ref="todBig" :src="require(`../assets/item_sprites/${bigKeyImage}`)" @click="changeBigKey('todBig')" /></td>
+            <td v-show="!simple"><img ref="todSmall" :src="require(`../assets/item_sprites/${todSmallKeyImage}`)" @click="changeSmallKey('todSmall')" /></td>
           </tr>
           <tr>
             <td><img ref="gripRing" :src="require(`../assets/item_sprites/${gripRingImage}`)" @click="changeGripRing()" /></td>
@@ -54,9 +63,9 @@
             <td><img ref="flippers" :src="require(`../assets/item_sprites/${flippersImage}`)" @click="changeFlippers()" /></td>
             <td><img ref="graveKey" :src="require(`../assets/item_sprites/${graveKeyImage}`)" @click="changeGraveKey()" /></td>
             <td><img ref="carlovMedal" :src="require(`../assets/item_sprites/${carlovImage}`)" @click="changeCarlov()" /></td>
-            <td>POW</td>
-            <td><img ref="powBig" :src="require(`../assets/item_sprites/${bigKeyImage}`)" @click="changeBigKey('powBig')" /></td>
-            <td><img ref="powSmall" :src="require(`../assets/item_sprites/${powSmallKeyImage}`)" @click="changeSmallKey('powSmall')" /></td>
+            <td v-show="!simple">POW</td>
+            <td v-show="!simple"><img ref="powBig" :src="require(`../assets/item_sprites/${bigKeyImage}`)" @click="changeBigKey('powBig')" /></td>
+            <td v-show="!simple"><img ref="powSmall" :src="require(`../assets/item_sprites/${powSmallKeyImage}`)" @click="changeSmallKey('powSmall')" /></td>
           </tr>
           <tr>
             <td><img ref="earth" :src="require(`../assets/item_sprites/${earthImage}`)" @click="changeEarth()" /></td>
@@ -64,11 +73,11 @@
             <td><img ref="water" :src="require(`../assets/item_sprites/${waterImage}`)" @click="changeWater()" /></td>
             <td><img ref="wind" :src="require(`../assets/item_sprites/${windImage}`)" @click="changeWind()" /></td>
             <td><img ref="cryptSmall" :src="require(`../assets/item_sprites/${cryptSmallKeyImage}`)" @click="changeSmallKey('cryptSmall', 'Crypt_Key')" /></td>
-            <td>DHC</td>
-            <td><img ref="dhcBig" :src="require(`../assets/item_sprites/${bigKeyImage}`)" @click="changeBigKey('dhcBig')" /></td>
-            <td><img ref="dhcSmall" :src="require(`../assets/item_sprites/${dhcSmallKeyImage}`)" @click="changeSmallKey('dhcSmall')" /></td>
+            <td v-show="!simple">DHC</td>
+            <td v-show="!simple"><img ref="dhcBig" :src="require(`../assets/item_sprites/${bigKeyImage}`)" @click="changeBigKey('dhcBig')" /></td>
+            <td v-show="!simple"><img ref="dhcSmall" :src="require(`../assets/item_sprites/${dhcSmallKeyImage}`)" @click="changeSmallKey('dhcSmall')" /></td>
           </tr>
-          <tr>
+          <tr v-show="!simple">
             <td>
               <img
                 ref="greenArrow"
@@ -108,6 +117,7 @@
             <td>
               <img
                 ref="red3"
+                :class="red3 > 0 ? 'on' : ''"
                 :src="require(`../assets/item_sprites/Kinstones/${red3Image}`)"
                 @click="changeKinstones('red3', 'Red 3/Red Kinstone 3')" />
             </td>
@@ -123,6 +133,18 @@
             <td><img ref="rockBreaker" :src="require(`../assets/item_sprites/${rockBreakerImage}`)" @click="changeRockBreaker()" /></td>
             <td><img ref="dashAttack" :src="require(`../assets/item_sprites/${dashAttackImage}`)" @click="changeDashAttack()" /></td>
             <td><img ref="downThrust" :src="require(`../assets/item_sprites/${downThrustImage}`)" @click="changeDownThrust()" /></td>
+            <td v-show="simple">
+              <img
+                ref="red3"
+                :src="require(`../assets/item_sprites/Kinstones/${red3Image}`)"
+                @click="changeKinstones('red3', 'Red 3/Red Kinstone 3')" />
+            </td>
+            <td v-show="!simple"><img ref="rollAttack" :class="hasRollAttack ? 'on' : ''" :src="require(`../assets/item_sprites/${rollAttackImage}`)" @click="changeRollAttack()" /></td>
+            <td v-show="!simple"><img ref="swordBeam" :class="hasSwordBeam ? 'on' : ''" :src="require(`../assets/item_sprites/${swordBeamImage}`)" @click="changeSwordBeam()" /></td>
+            <td v-show="!simple"><img ref="perilBeam" :class="hasPerilBeam ? 'on' : ''" :src="require(`../assets/item_sprites/${perilBeamImage}`)" @click="changePerilBeam()" /></td>
+            <td v-show="!simple"><img ref="greatSpinAttack" :class="hasGreatSpinAttack ? 'on' : ''" :src="require(`../assets/item_sprites/${greatSpinAttackImage}`)" @click="changeGreatSpinAttack()" /></td>
+          </tr>
+          <tr v-show="simple">
             <td><img ref="rollAttack" :src="require(`../assets/item_sprites/${rollAttackImage}`)" @click="changeRollAttack()" /></td>
             <td><img ref="swordBeam" :src="require(`../assets/item_sprites/${swordBeamImage}`)" @click="changeSwordBeam()" /></td>
             <td><img ref="perilBeam" :src="require(`../assets/item_sprites/${perilBeamImage}`)" @click="changePerilBeam()" /></td>
@@ -135,6 +157,10 @@
 </template>
 
 <script>
+  import {
+    Chrome as ChromeColorPicker,
+  } from 'vue-color';
+
   const defaultOptions = {
     bigKeyImage: 'Boss_Key.png',
 
@@ -273,6 +299,8 @@
   };
 
   export default {
+    name: 'Tracker',
+
     head() {
       return {
         title: 'Tracker',
@@ -286,7 +314,9 @@
       };
     },
 
-    name: 'Tracker',
+    components: {
+      ChromeColorPicker,
+    },
 
     // If a variable has the word 'has' in it, it is a true/false variable
     //   that gets taoggled when clicked.
@@ -294,7 +324,11 @@
     //   it is treated as a counter that is incremented on click, then reset after a certain point.
     // The variables are broken up into 8 groups of 8 as they appear in the rows on the tracker.
     data() {
-      return Object.assign({}, defaultOptions);
+      return Object.assign({
+        simple: true,
+        showColorPicker: false,
+        backgroundColor: '#A47312',
+      }, defaultOptions);
     },
 
     // Like the variables, it is split up into 8 groups of 8 as the items appear
@@ -303,6 +337,9 @@
     //   the kinstones and small keys, but I prefer the more descriptive image names.
     // The only one I am considering changing to fit this style is the bow.
     methods: {
+      updateBackgroundColor(val) {
+        this.backgroundColor = val.hex;
+      },
       // Row 1
       changeSword() {
         if (this.sword === 0) {
@@ -758,23 +795,47 @@
 </script>
 
 <style lang="scss" scoped>
+  .context-buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+
+    & > :not(:first-child) {
+      margin-left: 10px;
+    }
+
+    button {
+      padding: 5px;
+      position: relative;
+    }
+
+    .vc-chrome {
+      position: absolute;
+      z-index: 10;
+      left: 125px;
+      top: -1px;
+    }
+  }
+
   .tracker {
     display: flex;
-    margin-top: 150px;
+    margin-top: 110px;
     justify-content: center;
 
     table {
-      background-color: #A47312;
-
       td {
         text-align: center;
         width: 48px;
         height: 48px;
-      }
-    }
 
-    img {
-      filter: grayscale(100%);
+        img {
+          filter: grayscale(100%);
+
+          &.on {
+            filter: grayscale(0%);
+          }
+        }
+      }
     }
   }
 </style>
