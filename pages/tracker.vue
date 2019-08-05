@@ -6,7 +6,9 @@
       </button>
       <button @click.self="showColorPicker = !showColorPicker">
         {{ showColorPicker ? 'Hide color picker' : 'Show color picker' }}
-        <chrome-color-picker v-show="showColorPicker" :value="backgroundColor" @input="updateBackgroundColor" />
+        <no-ssr>
+          <chrome-color-picker v-show="showColorPicker" :value="backgroundColor" @input="updateBackgroundColor" />
+        </no-ssr>
       </button>
     </div>
     <div class="tracker">
