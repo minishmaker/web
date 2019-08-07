@@ -41,6 +41,9 @@
         <nuxt />
       </transition>
     </main>
+    <footer class="footer">
+      Site maintained by UselessHobo
+    </footer>
   </div>
 </template>
 
@@ -91,8 +94,10 @@
   }
 
   .main-container {
-    height: 100%;
     margin: auto;
+    margin-top: 0px;
+    display: flex;
+    align-items: space-between;
 
     @media only screen and (max-width: 600px) {
       width: 98%;
@@ -124,13 +129,14 @@
   }
 
   .nav-links {
-    font-size: 18px;
     display: flex;
+    flex: 0 1 0;
     justify-content: space-between;
     align-items: center;
+    font-size: 18px;
     background: $nav-background-color;
     padding: 12px 8px;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
     border-bottom: 1px solid $nav-border-color;
 
     .link-container {
@@ -171,5 +177,28 @@
         width: 100%;
       }
     }
+  }
+
+  #__nuxt, #__layout {
+    height: 100%;
+  }
+
+  #__layout {
+    & > div {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+  }
+
+  .footer {
+    display: flex;
+    flex: 0 1 0;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    height: 30px;
+    background-color: $footer-background-color;
+    border-top: 1px solid $footer-border-color;
   }
 </style>

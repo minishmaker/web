@@ -2,14 +2,14 @@ module.exports = {
   root: true,
   env: {
     browser: true,
-    node: true
+    node: true,
   },
   parserOptions: {
-    parser: 'babel-eslint'
+    parser: 'babel-eslint',
   },
   extends: [
     '@nuxtjs',
-    'plugin:nuxt/recommended'
+    'plugin:nuxt/recommended',
   ],
   // add your custom rules here
   rules: {
@@ -19,6 +19,8 @@ module.exports = {
     'vue/html-closing-bracket-newline': 'off',
     'vue/html-self-closing': 'off',
     'comma-dangle': ['warn', 'always'],
-    'no-console': 'off'
+    'no-console': 'off',
+    'vue/multiline-html-element-content-newline': 'off',
+    'vue/singleline-html-element-content-newline': 'off',
   },
 };

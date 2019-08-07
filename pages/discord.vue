@@ -1,5 +1,5 @@
 <template>
-  <main class="container">
+  <div class="container">
     <img
       src="~/assets/Forest_Minish.png"
       alt="Picture of a Forest Minish from Minish Cap" />
@@ -12,7 +12,7 @@
       </a>
       to report bugs, discuss logic, or just talk with the community.
     </section>
-  </main>
+  </div>
 </template>
 
 <script>
