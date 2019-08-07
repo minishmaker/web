@@ -1,5 +1,5 @@
 <template>
-  <main class="container">
+  <div class="container">
     <img
       src="~/assets/Link_MC.png"
       alt="Picture of Link from Minish Cap" />
@@ -15,7 +15,7 @@
         in the works, which will enable a better process for developing the randomizer portion.
       </p>
     </section>
-  </main>
+  </div>
 </template>
 
 <script>

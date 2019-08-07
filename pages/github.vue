@@ -1,5 +1,5 @@
 <template>
-  <main class="container">
+  <div class="container">
     <img
       src="~/assets/Vaati_Hylian_Form.png"
       alt="Picture of Vaati from Minish Cap" />
@@ -11,7 +11,7 @@
         found here
       </a>
     </section>
-  </main>
+  </div>
 </template>
 
 <script>

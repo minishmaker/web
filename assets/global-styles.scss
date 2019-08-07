@@ -1,14 +1,16 @@
 $nav-background-color: rgb(215, 215, 215);
 $nav-border-color--light: rgb(200, 200, 200);
 $nav-border-color: rgb(140, 140, 140);
+$footer-border-color: $nav-border-color;
+$footer-background-color: $nav-background-color;
 $site-background-color: rgb(240, 240, 240);
 $site-background-color--transparent: rgba(240, 240, 240, 0.6);
 $link-main-color: green;
 $link-main-color--hover: darkgreen;
 
 .container {
-  margin: 0 auto;
   display: flex;
+  flex: 100%;
   justify-content: center;
   text-align: center;
   flex-flow: row wrap;
