@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <div class="context-buttons">
       <button @click.prevent="simple = !simple">
         {{ simple ? 'Show full tracker' : 'Show simple tracker' }}
@@ -797,6 +797,10 @@
 </script>
 
 <style lang="scss" scoped>
+  .container {
+    display: unset;
+  }
+
   .context-buttons {
     margin-top: 20px;
     display: flex;

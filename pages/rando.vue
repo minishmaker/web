@@ -1,5 +1,5 @@
 <template>
-  <main class="container">
+  <div class="container">
     <img
       src="~/assets/Princess_Zelda.png"
       alt="Picture of Princess Zelda from Minish Cap" />
@@ -34,7 +34,7 @@
         Upload fail... :c
       </span> -->
     </section>
-  </main>
+  </div>
 </template>
 
 <script>
