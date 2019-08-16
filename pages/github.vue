@@ -11,7 +11,9 @@
         target="_blank">
         found here
       </a>
-      <div class="release">
+      <div
+        class="release"
+        v-show="latestRelease.name">
         <h3>Latest Release:</h3>
         <a
           :href="latestRelease.html_url"
