@@ -45,6 +45,7 @@ module.exports = {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     'nuxt-i18n',
+    '@nuxtjs/markdownit',
     [
       '@nuxtjs/localforage', {
         name        : 'MinishMaker',
@@ -54,6 +55,10 @@ module.exports = {
       },
     ],
   ],
+
+  markdownit: {
+    injected: true,
+  },
 
   i18n: {
     locales: i18n.locales,

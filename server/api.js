@@ -1,9 +1,8 @@
-// https://www.mono-project.com/docs/getting-started/install/linux/
-
 const express = require('express');
 const fileUpload = require('express-fileupload');
 const apigClientFactory = require('aws-api-gateway-client').default;
 const app = express();
+const axios = require('axios');
 require('dotenv').config();
 
 const config = {
@@ -47,6 +46,17 @@ app.post('/api/upload_rom', fileConfig, async (req, res, next) => {
       const romOk = !!req.files.rom;
       res.status(200).send(romOk);
     }
+  } catch (e) {
+    console.error(e);
+    res.sendStatus(500);
+  }
+});
+
+app.get('/api/releases', async (req, res, next) => {
+  try {
+    const url = 'https://api.github.com/repos/minishmaker/randomizer/releases';
+    const data = ( await axios.get(url, { headers: { Authorization: `token ${process.env.GITHUB_TOKEN}` } }) ).data;
+    res.json(data[0]);
   } catch (e) {
     console.error(e);
     res.sendStatus(500);
