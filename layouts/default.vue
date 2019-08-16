@@ -38,7 +38,7 @@
     </nav>
     <main class="main-container">
       <transition name="fade">
-        <nuxt />
+        <nuxt keep-alive />
       </transition>
     </main>
     <footer class="footer">
