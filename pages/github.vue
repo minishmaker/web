@@ -12,8 +12,8 @@
         found here
       </a>
       <div
-        class="release"
-        v-show="latestRelease.name">
+        v-show="latestRelease.name"
+        class="release">
         <h3>Latest Release:</h3>
         <a
           :href="latestRelease.html_url"
