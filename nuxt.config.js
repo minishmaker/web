@@ -1,8 +1,13 @@
 const pkg = require('./package');
 const i18n = require('./locales');
+require('dotenv').config();
 
 module.exports = {
   mode: 'universal',
+
+  env: {
+    GITHUB_TOKEN: process.env.GITHUB_TOKEN,
+  },
 
   /*
   ** Headers of the page
@@ -46,6 +51,7 @@ module.exports = {
     '@nuxtjs/axios',
     'nuxt-i18n',
     '@nuxtjs/markdownit',
+    '@nuxtjs/dotenv',
     [
       '@nuxtjs/localforage', {
         name        : 'MinishMaker',
@@ -72,7 +78,7 @@ module.exports = {
   ** Axios module configuration
   */
   axios: {
-    // See https://github.com/nuxt-community/axios-module#options
+    // See https://github.com/nuxt-community/axios-module#options,
     proxy: true,
   },
 

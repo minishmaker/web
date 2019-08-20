@@ -12,8 +12,8 @@
         found here
       </a>
       <div
-        class="release"
-        v-show="latestRelease.name">
+        v-show="latestRelease.id"
+        class="release">
         <h3>Latest Release:</h3>
         <a
           :href="latestRelease.html_url"
@@ -58,6 +58,7 @@
     data() {
       return {
         latestRelease: {
+          id: 0,
           body: '',
           author: {},
         },
@@ -65,7 +66,12 @@
     },
 
     async mounted() {
-      this.latestRelease = await this.$axios.$get('api/releases');
+      const url = 'https://api.github.com/repos/minishmaker/randomizer/releases';
+      try {
+        this.latestRelease = (await this.$axios.$get(url, { headers: { Authorization: `token ${process.env.GITHUB_TOKEN}`, }, }))[0];
+      } catch (e) {
+        console.error(e);
+      }
     },
 
     methods: {
@@ -111,7 +117,7 @@
       .release-body {
         background: $latest-release-background-color;
         max-height: 550px;
-        overflow-y: scroll;
+        overflow-y: auto;
       }
     }
   }
