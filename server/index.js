@@ -26,7 +26,7 @@ async function start() {
   // Listen to the server
   app.listen(process.env.PORT, process.env.HOST);
   consola.ready({
-    message: `Server listening on http://${process.env.HOST}:${process.env.PORT}`,
+    message: `Server listening on http://${process.env.PRODUCTION ? process.env.PROD_HOST : process.env.HOST}:${process.env.PORT}`,
     badge: true
   });
 };
