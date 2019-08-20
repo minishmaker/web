@@ -52,15 +52,4 @@ app.post('/api/upload_rom', fileConfig, async (req, res, next) => {
   }
 });
 
-app.get('/api/releases', async (req, res, next) => {
-  try {
-    const url = 'https://api.github.com/repos/minishmaker/randomizer/releases';
-    const data = ( await axios.get(url, { headers: { Authorization: `token ${process.env.GITHUB_TOKEN}` } }) ).data;
-    res.json(data[0]);
-  } catch (e) {
-    console.error(e);
-    res.sendStatus(500);
-  }
-});
-
 export default app;
