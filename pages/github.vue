@@ -10,7 +10,7 @@
         href="https://github.com/minishmaker"
         target="_blank">
         found here
-      </a>
+      </a>.
       <div
         v-show="latestRelease.id"
         class="release">

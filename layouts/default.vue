@@ -42,7 +42,10 @@
       </transition>
     </main>
     <footer class="footer">
-      Site maintained by UselessHobo
+      Site maintained by UselessHobo --&nbsp;
+      <span class="pull-right">
+        Images sourced from https://zelda.gamepedia.com
+      </span>
     </footer>
   </div>
 </template>
@@ -200,5 +203,9 @@
     height: 30px;
     background-color: $footer-background-color;
     border-top: 1px solid $footer-border-color;
+  }
+
+  .pull-right {
+    float: right;
   }
 </style>
