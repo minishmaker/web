@@ -54,7 +54,7 @@ module.exports = {
         option6: 'Four sword pedestal',
       },
       elementPed: {
-        name: 'Sword Pedestal',
+        name: 'Element Pedestal',
         option1: '4 element pedestal',
         option2: '3 element pedestal',
         option3: '2 element pedestal',
