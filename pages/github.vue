@@ -91,7 +91,7 @@
 </script>
 
 <style lang="scss" scoped>
-  $latest-release-background-color: rgba(190, 190, 190, 0.3);
+  @import '~@/assets/global-styles';
 
   .page-img {
     max-width: 230px;
@@ -115,7 +115,7 @@
       margin-top: 30px;
 
       .release-body {
-        background: $latest-release-background-color;
+        background: $transparent-background-color;
         max-height: 550px;
         overflow-y: auto;
       }
