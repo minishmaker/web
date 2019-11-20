@@ -5,9 +5,6 @@
       src="~/assets/Princess_Zelda.png"
       alt="Picture of Princess Zelda from Minish Cap" />
     <section class="sub-container">
-      <span>
-        Rando seed generation page! Someday this will hooked up c:
-      </span>
       <!-- <form
         ref="romInputForm"
         class="rom-upload"
@@ -34,6 +31,16 @@
       <span v-if="uploadFail">
         Upload fail... :c
       </span> -->
+      <button
+        class="change-setting"
+        @click="setDefaultSettings()">
+        Reset
+      </button>
+      <button
+        class="change-setting"
+        @click="setRaceSettings()">
+        Weekly Race Settings
+      </button>
       <form
         ref="optionsForm"
         class="options-form"
@@ -48,6 +55,7 @@
             <input
               id="opKeysanity"
               v-model="settings.keysanity"
+              :disabled="raceMode"
               type="checkbox"
               name="opKeysanity" />
             <label for="opKeysanity">
@@ -59,6 +67,7 @@
             <input
               id="opElementsInPool"
               v-model="settings.elementsInPool"
+              :disabled="raceMode"
               type="checkbox"
               name="opElementsInPool" />
             <label for="opElementsInPool">
@@ -70,6 +79,7 @@
             <input
               id="opDisableGlitches"
               v-model="settings.disableGlitches"
+              :disabled="raceMode"
               type="checkbox"
               name="opDisableGlitches" />
             <label for="opDisableGlitches">
@@ -81,6 +91,7 @@
             <input
               id="opObscureSpots"
               v-model="settings.obscureSpots"
+              :disabled="raceMode"
               type="checkbox"
               name="opObscureSpots" />
             <label for="opObscureSpots">
@@ -92,6 +103,7 @@
             <input
               id="opRupeesInPool"
               v-model="settings.rupeesInPool"
+              :disabled="raceMode"
               type="checkbox"
               name="opRupeesInPool" />
             <label for="opRupeesInPool">
@@ -103,6 +115,7 @@
             <input
               id="opNonSwordWeapons"
               v-model="settings.nonSwordWeapons"
+              :disabled="raceMode"
               type="checkbox"
               name="opNonSwordWeapons" />
             <label for="opNonSwordWeapons">
@@ -114,6 +127,7 @@
             <input
               id="opTrapsInItemPool"
               v-model="settings.trapsInItemPool"
+              :disabled="raceMode"
               type="checkbox"
               name="opTrapsInItemPool" />
             <label for="opTrapsInItemPool">
@@ -123,8 +137,21 @@
 
           <div class="options-group">
             <input
+              id="opOneHitTimer"
+              v-model="settings.oneHitTimer"
+              :disabled="raceMode"
+              type="checkbox"
+              name="opOneHitTimer" />
+            <label for="opOneHitTimer">
+              {{ $t('rando.gimmick.oneHitTimer') }}
+            </label>
+          </div>
+
+          <div class="options-group">
+            <input
               id="opRandomMusic"
               v-model="settings.randomMusic"
+              :disabled="raceMode"
               type="checkbox"
               name="opRandomMusic" />
             <label for="opRandomMusic">
@@ -132,13 +159,14 @@
             </label>
           </div>
 
-          <div class="options-group">
+          <div :class="['options-group', raceMode ? 'disabled' : '']">
             <label for="opKinstoneFusion">
               {{ $t('rando.seed.kinstoneFusions.name') }}
             </label>
             <select
               id="opKinstoneFusion"
               v-model="settings.kinstoneFusion"
+              :disabled="raceMode"
               type="select"
               name="opKinstoneFusion">
               <option value="0">
@@ -155,13 +183,14 @@
 
           <div
             v-show="settings.kinstoneFusion == '2'"
-            class="options-group">
+            :class="['options-group', raceMode ? 'disabled' : '']">
             <label for="opKinstoneFusionSkips">
               {{ $t('rando.seed.skipFusions.name') }}
             </label>
             <select
               id="opKinstoneFusionSkips"
               v-model="settings.kinstoneFusionSkips"
+              :disabled="raceMode"
               type="select"
               name="opKinstoneFusionSkips">
               <option value="0">
@@ -176,13 +205,14 @@
             </select>
           </div>
 
-          <div class="options-group">
+          <div :class="['options-group', raceMode ? 'disabled' : '']">
             <label for="opOpenDHC">
               {{ $t('rando.seed.openDHC.name') }}
             </label>
             <select
               id="opOpenDHC"
               v-model="settings.openDHC"
+              :disabled="raceMode"
               type="select"
               name="opOpenDHC">
               <option value="0">
@@ -202,13 +232,14 @@
 
           <div
             v-show="parseInt(settings.openDHC, 10) < 2"
-            class="options-group">
+            :class="['options-group', raceMode ? 'disabled' : '']">
             <label for="opSwordPed">
               {{ $t('rando.seed.swordPed.name') }}
             </label>
             <select
               id="opSwordPed"
               v-model="settings.swordPed"
+              :disabled="raceMode"
               type="select"
               name="opSwordPed">
               <option value="0">
@@ -234,13 +265,14 @@
 
           <div
             v-show="parseInt(settings.openDHC, 10) < 2"
-            class="options-group">
+            :class="['options-group', raceMode ? 'disabled' : '']">
             <label for="opElementPed">
               {{ $t('rando.seed.elementPed.name') }}
             </label>
             <select
               id="opElementPed"
               v-model="settings.elementPed"
+              :disabled="raceMode"
               type="select"
               name="opElementPed">
               <option value="0">
@@ -270,19 +302,9 @@
 
           <div class="options-group">
             <input
-              id="opOneHitTimer"
-              v-model="settings.oneHitTimer"
-              type="checkbox"
-              name="opOneHitTimer" />
-            <label for="opOneHitTimer">
-              {{ $t('rando.gimmick.oneHitTimer') }}
-            </label>
-          </div>
-
-          <div class="options-group">
-            <input
               id="opRandomLanguage"
               v-model="settings.randomLanguage"
+              :disabled="raceMode"
               type="checkbox"
               name="opRandomLanguage" />
             <label for="opRandomLanguage">
@@ -348,13 +370,14 @@
               class="color-preview" />
           </div>
 
-          <div class="options-group">
+          <div :class="['options-group', raceMode ? 'disabled' : '']">
             <label for="opFollower">
               {{ $t('rando.gimmick.follower.name') }}
             </label>
             <select
               id="opFollower"
               v-model="settings.follower"
+              :disabled="raceMode"
               type="select"
               name="opFollower">
               <option value="0">
@@ -387,19 +410,24 @@
             </select>
           </div>
 
-          <div class="options-group">
+          <div :class="['options-group', raceMode ? 'disabled' : '']">
             <label for="opFuzziness">
               {{ $t('rando.gimmick.fuzziness') }}
             </label>
-            None&nbsp;
+            <span>
+              None&nbsp;
+            </span>
             <input
               id="opFuzziness"
               v-model="settings.fuzziness"
+              :disabled="raceMode"
               type="range"
               name="opFuzziness"
               min="-1"
               max="14" />
-            &nbsp;Max
+            <span>
+              &nbsp;Max
+            </span>
           </div>
         </section>
 
@@ -465,6 +493,30 @@
     },
   };
 
+  const defaultSettings = {
+    keysanity: false,
+    elementsInPool: false,
+    disableGlitches: true,
+    obscureSpots: false,
+    rupeesInPool: false,
+    nonSwordWeapons: false,
+    trapsInItemPool: false,
+    oneHitTimer: false,
+    kinstoneFusion: '0',
+    kinstoneFusionSkips: '0',
+    openDHC: '0',
+    swordPed: '0',
+    elementPed: '0',
+    randomMusic: false,
+    randomLanguage: false,
+    rainbowHearts: false,
+    tunicColor: '#10ff08',
+    heartColor: '#ff5010',
+    splitBarColor: '#4aff18',
+    follower: '0',
+    fuzziness: '-1',
+  };
+
   export default {
     head() {
       return {
@@ -491,29 +543,8 @@
         showTunicColorPicker: false,
         showHeartColorPicker: false,
         showSplitBarColorPicker: false,
-        settings: {
-          keysanity: false,
-          elementsInPool: false,
-          disableGlitches: true,
-          obscureSpots: false,
-          rupeesInPool: false,
-          nonSwordWeapons: false,
-          trapsInItemPool: false,
-          oneHitTimer: false,
-          kinstoneFusion: '0',
-          kinstoneFusionSkips: '0',
-          openDHC: '0',
-          swordPed: '0',
-          elementPed: '0',
-          randomMusic: false,
-          randomLanguage: false,
-          rainbowHearts: false,
-          tunicColor: '#10ff08',
-          heartColor: '#ff5010',
-          splitBarColor: '#4aff18',
-          follower: '0',
-          fuzziness: '-1',
-        },
+        raceMode: false,
+        settings: Object.assign({}, defaultSettings),
       };
     },
 
@@ -560,6 +591,18 @@
       generateSettingsString() {
 
       },
+      setRaceSettings() {
+        this.setDefaultSettings();
+        this.settings.trapsInItemPool = true;
+        this.raceMode = true;
+      },
+      setDefaultSettings() {
+        this.settings = Object.assign({}, defaultSettings);
+        this.raceMode = false;
+        this.updateColorPicker('tunicColor', { hex: defaultSettings.tunicColor, });
+        this.updateColorPicker('splitBarColor', { hex: defaultSettings.splitBarColor, });
+        this.updateColorPicker('heartColor', { hex: defaultSettings.heartColor, });
+      },
     },
   };
 </script>
@@ -569,6 +612,16 @@
 
   .page-img {
     max-width: 230px;
+  }
+
+  button {
+    width: 140px;
+    padding: 5px;
+    position: relative;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   .options-form {
@@ -584,12 +637,6 @@
       margin: 16px;
       padding: 12px;
       border: 1px solid $nav-border-color;
-
-      button {
-        width: 120px;
-        padding: 5px;
-        position: relative;
-      }
 
       .color-preview {
         display: inline-block;
@@ -616,6 +663,18 @@
         padding: 4px;
         padding-right: 12px;
 
+        &.disabled {
+          & > * {
+            color: $nav-border-color;
+          }
+
+          label, input[type="range"], span {
+            &:hover {
+              cursor: not-allowed;
+            }
+          }
+        }
+
         input {
           &[type="checkbox"] {
             -webkit-appearance:none;
@@ -624,6 +683,23 @@
             width: 16px;
             height: 16px;
             margin-right: 4px;
+
+            &:disabled {
+              border-color: $nav-background-color;
+
+              & + label {
+                color: $nav-border-color;
+
+                &:hover {
+                  cursor: not-allowed;
+                }
+              }
+
+              &:hover {
+                border-color: $nav-background-color;
+                cursor: not-allowed;
+              }
+            }
 
             &:hover {
               cursor: pointer;
@@ -655,6 +731,12 @@
         select {
           width: 185px;
           padding: 2px;
+
+          &:disabled {
+            &:hover {
+              cursor: not-allowed;
+            }
+          }
         }
 
         label {
