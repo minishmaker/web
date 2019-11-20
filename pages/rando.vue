@@ -41,7 +41,7 @@
         <!-- Main options -->
         <section class="options-container">
           <h3 class="options-title">
-            Seed Options
+            {{ $t('rando.seed.name') }}
           </h3>
 
           <div class="options-group">
@@ -51,7 +51,7 @@
               type="checkbox"
               name="opKeysanity" />
             <label for="opKeysanity">
-              Keysanity
+              {{ $t('rando.seed.keysanity') }}
             </label>
           </div>
 
@@ -62,7 +62,7 @@
               type="checkbox"
               name="opElementsInPool" />
             <label for="opElementsInPool">
-              Elements in Item Pool
+              {{ $t('rando.seed.elementsInPool') }}
             </label>
           </div>
 
@@ -73,7 +73,7 @@
               type="checkbox"
               name="opDisableGlitches" />
             <label for="opDisableGlitches">
-              Disable Glitches
+              {{ $t('rando.seed.disableGlitches') }}
             </label>
           </div>
 
@@ -84,7 +84,7 @@
               type="checkbox"
               name="opObscureSpots" />
             <label for="opObscureSpots">
-              Obscure Spots
+              {{ $t('rando.seed.obscureSpots') }}
             </label>
           </div>
 
@@ -95,7 +95,7 @@
               type="checkbox"
               name="opRupeesInPool" />
             <label for="opRupeesInPool">
-              Rupees in Pool
+              {{ $t('rando.seed.rupeesInPool') }}
             </label>
           </div>
 
@@ -106,7 +106,7 @@
               type="checkbox"
               name="opNonSwordWeapons" />
             <label for="opNonSwordWeapons">
-              Non-Sword Weapons
+              {{ $t('rando.seed.nonSwordWeapons') }}
             </label>
           </div>
 
@@ -117,7 +117,7 @@
               type="checkbox"
               name="opTrapsInItemPool" />
             <label for="opTrapsInItemPool">
-              Traps in Item Pool
+              {{ $t('rando.seed.trapsInItemPool') }}
             </label>
           </div>
 
@@ -128,13 +128,13 @@
               type="checkbox"
               name="opRandomMusic" />
             <label for="opRandomMusic">
-              Randomize Music
+              {{ $t('rando.seed.randomMusic') }}
             </label>
           </div>
 
           <div class="options-group">
             <label for="opKinstoneFusion">
-              Kinstone Fusions
+              {{ $t('rando.seed.kinstoneFusions.name') }}
             </label>
             <select
               id="opKinstoneFusion"
@@ -142,13 +142,13 @@
               type="select"
               name="opKinstoneFusion">
               <option value="0">
-                No normal fusions
+                {{ $t('rando.seed.kinstoneFusions.option1') }}
               </option>
               <option value="1">
-                Open fusion mode
+                {{ $t('rando.seed.kinstoneFusions.option2') }}
               </option>
               <option value="2">
-                Vanilla fusions
+                {{ $t('rando.seed.kinstoneFusions.option3') }}
               </option>
             </select>
           </div>
@@ -157,7 +157,7 @@
             v-show="settings.kinstoneFusion == '2'"
             class="options-group">
             <label for="opKinstoneFusionSkips">
-              Skip Fusions
+              {{ $t('rando.seed.skipFusions.name') }}
             </label>
             <select
               id="opKinstoneFusionSkips"
@@ -165,20 +165,20 @@
               type="select"
               name="opKinstoneFusionSkips">
               <option value="0">
-                Allow fusion skips
+                {{ $t('rando.seed.skipFusions.option1') }}
               </option>
               <option value="1">
-                Instant fusion skips
+                {{ $t('rando.seed.skipFusions.option2') }}
               </option>
               <option value="2">
-                No fusion skips
+                {{ $t('rando.seed.skipFusions.option3') }}
               </option>
             </select>
           </div>
 
           <div class="options-group">
             <label for="opOpenDHC">
-              DHC/Pedestal
+              {{ $t('rando.seed.openDHC.name') }}
             </label>
             <select
               id="opOpenDHC"
@@ -186,16 +186,16 @@
               type="select"
               name="opOpenDHC">
               <option value="0">
-                Pedestal open/Regular DHC
+                {{ $t('rando.seed.openDHC.option1') }}
               </option>
               <option value="1">
-                Pedestal finish/No DHC
+                {{ $t('rando.seed.openDHC.option2') }}
               </option>
               <option value="2">
-                Open DHC
+                {{ $t('rando.seed.openDHC.option3') }}
               </option>
               <option value="3">
-                Open DHC + Pedestal items
+                {{ $t('rando.seed.openDHC.option4') }}
               </option>
             </select>
           </div>
@@ -204,7 +204,7 @@
             v-show="parseInt(settings.openDHC, 10) < 2"
             class="options-group">
             <label for="opSwordPed">
-              Sword Pedestal
+              {{ $t('rando.seed.swordPed.name') }}
             </label>
             <select
               id="opSwordPed"
@@ -212,22 +212,22 @@
               type="select"
               name="opSwordPed">
               <option value="0">
-                No sword pedestal
+                {{ $t('rando.seed.swordPed.option1') }}
               </option>
               <option value="1">
-                Smith sword pedestal
+                {{ $t('rando.seed.swordPed.option2') }}
               </option>
               <option value="2">
-                White sword pedestal
+                {{ $t('rando.seed.swordPed.option3') }}
               </option>
               <option value="3">
-                Red sword pedestal
+                {{ $t('rando.seed.swordPed.option4') }}
               </option>
               <option value="4">
-                Blue sword pedestal
+                {{ $t('rando.seed.swordPed.option5') }}
               </option>
               <option value="5">
-                Four sword pedestal
+                {{ $t('rando.seed.swordPed.option6') }}
               </option>
             </select>
           </div>
@@ -236,7 +236,7 @@
             v-show="parseInt(settings.openDHC, 10) < 2"
             class="options-group">
             <label for="opElementPed">
-              Element Pedestal
+              {{ $t('rando.seed.elementPed.name') }}
             </label>
             <select
               id="opElementPed"
@@ -244,19 +244,19 @@
               type="select"
               name="opElementPed">
               <option value="0">
-                4 element pedestal
+                {{ $t('rando.seed.elementPed.option1') }}
               </option>
               <option value="1">
-                3 element pedestal
+                {{ $t('rando.seed.elementPed.option2') }}
               </option>
               <option value="2">
-                2 element pedestal
+                {{ $t('rando.seed.elementPed.option3') }}
               </option>
               <option value="3">
-                1 element pedestal
+                {{ $t('rando.seed.elementPed.option4') }}
               </option>
               <option value="4">
-                No element pedestal
+                {{ $t('rando.seed.elementPed.option5') }}
               </option>
             </select>
           </div>
@@ -265,7 +265,7 @@
         <!-- Cosmetics -->
         <section class="options-container">
           <h3 class="options-title">
-            Cosmetics/Gimmicks
+            {{ $t('rando.gimmick.name') }}
           </h3>
 
           <div class="options-group">
@@ -275,7 +275,7 @@
               type="checkbox"
               name="opOneHitTimer" />
             <label for="opOneHitTimer">
-              One Hit K.O. Timer Mode
+              {{ $t('rando.gimmick.oneHitTimer') }}
             </label>
           </div>
 
@@ -286,7 +286,7 @@
               type="checkbox"
               name="opRandomLanguage" />
             <label for="opRandomLanguage">
-              Randomize Language
+              {{ $t('rando.gimmick.randomLanguage') }}
             </label>
           </div>
 
@@ -297,13 +297,13 @@
               type="checkbox"
               name="opRainbowHearts" />
             <label for="opRainbowHearts">
-              Rainbow Hearts
+              {{ $t('rando.gimmick.rainbowHearts') }}
             </label>
           </div>
 
           <div class="options-group">
             <button @click.prevent.self="showTunicColorPicker = !showTunicColorPicker">
-              {{ showTunicColorPicker ? 'Done' : 'Pick tunic color' }}
+              {{ showTunicColorPicker ? $t('rando.gimmick.done') : $t('rando.gimmick.tunicColor') }}
               <no-ssr>
                 <chrome-color-picker
                   v-show="showTunicColorPicker"
@@ -318,7 +318,7 @@
 
           <div class="options-group">
             <button @click.prevent.self="showSplitBarColorPicker = !showSplitBarColorPicker">
-              {{ showSplitBarColorPicker ? 'Done' : 'Pick split bar color' }}
+              {{ showSplitBarColorPicker ? $t('rando.gimmick.done') : $t('rando.gimmick.splitBarColor') }}
               <no-ssr>
                 <chrome-color-picker
                   v-show="showSplitBarColorPicker"
@@ -335,7 +335,7 @@
             v-show="!settings.rainbowHearts"
             class="options-group">
             <button @click.prevent.self="showHeartColorPicker = !showHeartColorPicker">
-              {{ showHeartColorPicker ? 'Done' : 'Pick heart color' }}
+              {{ showHeartColorPicker ? $t('rando.gimmick.done') : $t('rando.gimmick.heartColor') }}
               <no-ssr>
                 <chrome-color-picker
                   v-show="showHeartColorPicker"
@@ -350,7 +350,7 @@
 
           <div class="options-group">
             <label for="opFollower">
-              Permanent Follower
+              {{ $t('rando.gimmick.follower.name') }}
             </label>
             <select
               id="opFollower"
@@ -358,38 +358,38 @@
               type="select"
               name="opFollower">
               <option value="0">
-                No follower
+                {{ $t('rando.gimmick.follower.option1') }}
               </option>
               <option value="1">
-                Mailman
+                {{ $t('rando.gimmick.follower.option2') }}
               </option>
               <option value="2">
-                Zelda
+                {{ $t('rando.gimmick.follower.option3') }}
               </option>
               <option value="3">
-                Malon
+                {{ $t('rando.gimmick.follower.option4') }}
               </option>
               <option value="4">
-                Smith
+                {{ $t('rando.gimmick.follower.option5') }}
               </option>
               <option value="5">
-                King Gustaf
+                {{ $t('rando.gimmick.follower.option6') }}
               </option>
               <option value="6">
-                Cow
+                {{ $t('rando.gimmick.follower.option7') }}
               </option>
               <option value="7">
-                Goron
+                {{ $t('rando.gimmick.follower.option8') }}
               </option>
               <option value="8">
-                Anju
+                {{ $t('rando.gimmick.follower.option9') }}
               </option>
             </select>
           </div>
 
           <div class="options-group">
             <label for="opFuzziness">
-              Fuzziness
+              {{ $t('rando.gimmick.fuzziness') }}
             </label>
             None&nbsp;
             <input
@@ -406,12 +406,12 @@
         <!-- Additional -->
         <section class="options-container">
           <h3 class="options-title">
-            Additional Settings
+            {{ $t('rando.additional.name') }}
           </h3>
 
           <div class="options-group">
             <label for="opPatchFile">
-              Custom Patch
+              {{ $t('rando.additional.customPatch') }}
             </label>
             <input
               id="opPatchFile"
@@ -422,7 +422,7 @@
 
           <div class="options-group">
             <label for="opLogicFile">
-              Custom Logic
+              {{ $t('rando.additional.customLogic') }}
             </label>
             <input
               id="opLogicFile"
@@ -433,7 +433,7 @@
 
           <div class="options-group">
             <label for="opSeed">
-              Seed Number
+              {{ $t('rando.additional.seedNumber') }}
             </label>
             <input
               id="opSeed"
@@ -448,7 +448,7 @@
         <input
           class="rando-submit"
           type="submit"
-          value="Randomize!" />
+          :value="$t('rando.randomize')" />
       </form>
     </section>
   </div>
@@ -644,7 +644,7 @@
           }
 
           &[type="file"] {
-            width: 220px;
+            width: 205px;
           }
 
           &[type="text"] {
