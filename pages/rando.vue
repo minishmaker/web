@@ -154,7 +154,7 @@
           </div>
 
           <div
-            v-show="settings.kinstoneFusion > 0"
+            v-show="settings.kinstoneFusion == '2'"
             class="options-group">
             <label for="opKinstoneFusionSkips">
               Skip Fusions
@@ -402,6 +402,53 @@
             &nbsp;Max
           </div>
         </section>
+
+        <!-- Additional -->
+        <section class="options-container">
+          <h3 class="options-title">
+            Additional Settings
+          </h3>
+
+          <div class="options-group">
+            <label for="opPatchFile">
+              Custom Patch
+            </label>
+            <input
+              id="opPatchFile"
+              ref="opPatchFile"
+              name="opPatchFile"
+              type="file" />
+          </div>
+
+          <div class="options-group">
+            <label for="opLogicFile">
+              Custom Logic
+            </label>
+            <input
+              id="opLogicFile"
+              ref="opLogicFile"
+              name="opLogicFile"
+              type="file" />
+          </div>
+
+          <div class="options-group">
+            <label for="opSeed">
+              Seed Number
+            </label>
+            <input
+              id="opSeed"
+              ref="opSeed"
+              type="text"
+              name="opSeed"
+              title="Numbers only"
+              pattern="[0-9]+" />
+          </div>
+        </section>
+
+        <input
+          class="rando-submit"
+          type="submit"
+          value="Randomize!" />
       </form>
     </section>
   </div>
@@ -510,6 +557,9 @@
         this.settings[name] = val.hex;
         this.$refs[`${name}Preview`].style.backgroundColor = val.hex;
       },
+      generateSettingsString() {
+
+      },
     },
   };
 </script>
@@ -525,91 +575,122 @@
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
-  }
 
-  .options-container {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
-    position: relative;
-    margin: 16px;
-    padding: 12px;
-    border: 1px solid $nav-border-color;
-
-    button {
-      width: 120px;
-      padding: 5px;
+    .options-container {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: space-between;
       position: relative;
-    }
-
-    .color-preview {
-      display: inline-block;
-      margin-left: 6px;
-      width: 31px;
-      height: 31px;
+      margin: 16px;
+      padding: 12px;
       border: 1px solid $nav-border-color;
 
-      &::before {
-        content: ' ';
+      button {
+        width: 120px;
+        padding: 5px;
+        position: relative;
       }
-    }
 
-    .options-title {
-      position: absolute;
-      background: $site-background-color;
-      padding: 2px 10px;
-      top: calc(-1rem + 1px);
-    }
+      .color-preview {
+        display: inline-block;
+        margin-left: 6px;
+        width: 31px;
+        height: 31px;
+        border: 1px solid $nav-border-color;
 
-    .options-group {
-      display: flex;
-      align-items: center;
-      padding: 4px;
-      padding-right: 12px;
-
-      input[type="checkbox"] {
-        -webkit-appearance:none;
-        border: 2px solid $nav-border-color;
-        border-radius: 2px;
-        width: 16px;
-        height: 16px;
-        margin-right: 4px;
-
-        &:hover {
-          cursor: pointer;
-          border-color: black;
+        &::before {
+          content: ' ';
         }
+      }
 
-        &:checked {
-          background: $link-main-color;
-        }
+      .options-title {
+        position: absolute;
+        background: $site-background-color;
+        padding: 2px 10px;
+        top: calc(-1rem + 1px);
+      }
 
-        & + label {
-          flex-grow: unset;
+      .options-group {
+        display: flex;
+        align-items: center;
+        padding: 4px;
+        padding-right: 12px;
 
-          &:hover {
-            cursor: pointer;
+        input {
+          &[type="checkbox"] {
+            -webkit-appearance:none;
+            border: 2px solid $nav-border-color;
+            border-radius: 2px;
+            width: 16px;
+            height: 16px;
+            margin-right: 4px;
+
+            &:hover {
+              cursor: pointer;
+              border-color: black;
+            }
+
+            &:checked {
+              background: $link-main-color;
+            }
+
+            & + label {
+              flex-grow: unset;
+
+              &:hover {
+                cursor: pointer;
+              }
+            }
+          }
+
+          &[type="file"] {
+            width: 220px;
+          }
+
+          &[type="text"] {
+            width: 185px;
           }
         }
+
+        select {
+          width: 185px;
+          padding: 2px;
+        }
+
+        label {
+          text-align:left;
+          flex-grow: 1;
+          padding-right: 10px;
+        }
       }
 
-      select {
-        width: 185px;
-        padding: 2px;
-      }
-
-      label {
-        text-align:left;
-        flex-grow: 1;
-        padding-right: 10px;
+      .vc-chrome {
+        position: absolute;
+        z-index: 10;
+        left: 125px;
+        top: -1px;
       }
     }
 
-    .vc-chrome {
-      position: absolute;
-      z-index: 10;
-      left: 125px;
-      top: -1px;
+    .rando-submit {
+      width: 225px;
+      height: 50px;
+      font-size: 22px;
+      color: $link-main-color;
+      background: $nav-background-color;
+      border: 2px solid $nav-border-color;
+      border-radius: 8px;
+
+      transition: color 0.75s ease-in-out;
+      transition: border-color 0.75s ease-in-out;
+      transition: font-size 0.75s ease-in-out;
+
+      &:hover {
+        cursor: pointer;
+        border-color: black;
+        color: $link-main-color--hover;
+        font-size: 24px;
+      }
     }
   }
 
