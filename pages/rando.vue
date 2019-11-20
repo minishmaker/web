@@ -31,16 +31,26 @@
       <span v-if="uploadFail">
         Upload fail... :c
       </span> -->
-      <button
-        class="change-setting"
-        @click="setDefaultSettings()">
-        Reset
-      </button>
-      <button
-        class="change-setting"
-        @click="setRaceSettings()">
-        Weekly Race Settings
-      </button>
+      <section class="settings-buttons-container">
+        <div>
+          <button
+            class="settings-button"
+            @click="setRaceSettings()">
+            Weekly Race Settings
+          </button>
+          <button
+            class="settings-button"
+            @click="setRandomSettings()">
+            Random Settings
+          </button>
+        </div>
+        <button
+          class="settings-button reset"
+          @click="setDefaultSettings()">
+          Reset
+        </button>
+      </section>
+
       <form
         ref="optionsForm"
         class="options-form"
@@ -594,6 +604,7 @@
       setRaceSettings() {
         this.setDefaultSettings();
         this.settings.trapsInItemPool = true;
+        this.settings.kinstoneFusion = '1';
         this.raceMode = true;
       },
       setDefaultSettings() {
@@ -602,6 +613,48 @@
         this.updateColorPicker('tunicColor', { hex: defaultSettings.tunicColor, });
         this.updateColorPicker('splitBarColor', { hex: defaultSettings.splitBarColor, });
         this.updateColorPicker('heartColor', { hex: defaultSettings.heartColor, });
+      },
+      randomBoolean() {
+        return !!Math.floor(Math.random() * 2);
+      },
+      randomNumberString(max) {
+        return Math.floor(Math.random() * max).toString();
+      },
+      randomColorHex() {
+        const chars = '0123456789abcdef';
+        let color = '#';
+        for (let i = 0; i < 6; i++) {
+          color += chars[Math.floor(Math.random() * chars.length)];
+        }
+        return color;
+      },
+      setRandomSettings() {
+        this.raceMode = false;
+        this.settings.keysanity = this.randomBoolean();
+        this.settings.elementsInPool = this.randomBoolean();
+        this.settings.disableGlitches = this.randomBoolean();
+        this.settings.obscureSpots = this.randomBoolean();
+        this.settings.rupeesInPool = this.randomBoolean();
+        this.settings.nonSwordWeapons = this.randomBoolean();
+        this.settings.trapsInItemPool = this.randomBoolean();
+        this.settings.oneHitTimer = this.randomBoolean();
+        this.settings.kinstoneFusion = this.randomNumberString(3);
+        this.settings.kinstoneFusionSkips = this.randomNumberString(3);
+        this.settings.openDHC = this.randomNumberString(4);
+        this.settings.swordPed = this.randomNumberString(6);
+        this.settings.elementPed = this.randomNumberString(5);
+        this.settings.randomMusic = this.randomBoolean();
+        this.settings.randomLanguage = this.randomBoolean();
+        this.settings.rainbowHearts = this.randomBoolean();
+        this.settings.tunicColor = this.randomColorHex();
+        this.settings.heartColor = this.randomColorHex();
+        this.settings.splitBarColor = this.randomColorHex();
+        this.settings.follower = this.randomNumberString(9);
+        this.settings.fuzziness = (Math.floor(Math.random() * 16) - 1).toString(); // rolls 0-15 then subtracts 1, making the range -1 to 14
+
+        this.updateColorPicker('tunicColor', { hex: this.settings.tunicColor, });
+        this.updateColorPicker('splitBarColor', { hex: this.settings.splitBarColor, });
+        this.updateColorPicker('heartColor', { hex: this.settings.heartColor, });
       },
     },
   };
@@ -614,6 +667,16 @@
     max-width: 230px;
   }
 
+  .settings-buttons-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 8px 16px;
+
+    div {
+      display: inline-block;
+    }
+  }
+
   button {
     width: 140px;
     padding: 5px;
@@ -621,6 +684,22 @@
 
     &:hover {
       cursor: pointer;
+    }
+
+    &.settings-button {
+      color: $link-main-color;
+      background: $nav-background-color;
+      border: 2px solid $nav-border-color;
+      border-radius: 2px;
+
+      &.reset {
+        color: red;
+      }
+
+      &:hover {
+        cursor: pointer;
+        border-color: black;
+      }
     }
   }
 
@@ -764,7 +843,6 @@
       border-radius: 8px;
 
       transition: color 0.75s ease-in-out;
-      transition: border-color 0.75s ease-in-out;
       transition: font-size 0.75s ease-in-out;
 
       &:hover {
