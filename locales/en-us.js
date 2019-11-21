@@ -15,6 +15,11 @@ module.exports = {
     greeting: 'Minish Cap Rando! Woot!',
   },
   rando: {
+    top: {
+      weekly: 'Weekly Race Settings',
+      random: 'Random Settings',
+      reset: 'Reset',
+    },
     seed: {
       name: 'Seed Options',
       keysanity: 'Keysanity',
