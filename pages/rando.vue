@@ -36,18 +36,18 @@
           <button
             class="settings-button"
             @click="setRaceSettings()">
-            Weekly Race Settings
+            {{ $t('rando.top.weekly') }}
           </button>
           <button
             class="settings-button"
             @click="setRandomSettings()">
-            Random Settings
+            {{ $t('rando.top.random') }}
           </button>
         </div>
         <button
           class="settings-button reset"
           @click="setDefaultSettings()">
-          Reset
+          {{ $t('rando.top.reset') }}
         </button>
       </section>
 
@@ -346,6 +346,11 @@
             <span
               ref="tunicColorPreview"
               class="color-preview" />
+            <button
+              class="random-button"
+              @click="randomizeColorPicker('tunicColor')">
+              🎲
+            </button>
           </div>
 
           <div class="options-group">
@@ -361,6 +366,11 @@
             <span
               ref="splitBarColorPreview"
               class="color-preview" />
+            <button
+              class="random-button"
+              @click="randomizeColorPicker('splitBarColor')">
+              🎲
+            </button>
           </div>
 
           <div
@@ -378,6 +388,11 @@
             <span
               ref="heartColorPreview"
               class="color-preview" />
+            <button
+              class="random-button"
+              @click="randomizeColorPicker('heartColor')">
+              🎲
+            </button>
           </div>
 
           <div :class="['options-group', raceMode ? 'disabled' : '']">
@@ -475,11 +490,17 @@
             </label>
             <input
               id="opSeed"
+              v-model="settings.seed"
               ref="opSeed"
               type="text"
               name="opSeed"
               title="Numbers only"
               pattern="[0-9]+" />
+            <button
+              class="random-button"
+              @click="randomizeSeed()">
+              🎲
+            </button>
           </div>
         </section>
 
@@ -503,6 +524,10 @@
     },
   };
 
+  function randomSeed() {
+    return Math.floor(Math.random() * 2147483647).toString();
+  }
+
   const defaultSettings = {
     keysanity: false,
     elementsInPool: false,
@@ -525,6 +550,7 @@
     splitBarColor: '#4aff18',
     follower: '0',
     fuzziness: '-1',
+    seed: randomSeed(),
   };
 
   export default {
@@ -594,12 +620,12 @@
         formData.append('rom', file);
         await this.$axios.$post('api/check_rom', formData, headerData);
       },
+      generateSettingsString() {
+
+      },
       updateColorPicker(name, val) {
         this.settings[name] = val.hex;
         this.$refs[`${name}Preview`].style.backgroundColor = val.hex;
-      },
-      generateSettingsString() {
-
       },
       setRaceSettings() {
         this.setDefaultSettings();
@@ -613,6 +639,12 @@
         this.updateColorPicker('tunicColor', { hex: defaultSettings.tunicColor, });
         this.updateColorPicker('splitBarColor', { hex: defaultSettings.splitBarColor, });
         this.updateColorPicker('heartColor', { hex: defaultSettings.heartColor, });
+      },
+      randomizeColorPicker(name) {
+        this.updateColorPicker(name, { hex: this.randomColorHex(), });
+      },
+      randomizeSeed() {
+        this.settings.seed = randomSeed();
       },
       randomBoolean() {
         return !!Math.floor(Math.random() * 2);
@@ -679,26 +711,32 @@
 
   button {
     width: 140px;
+    height: 32px;
     padding: 5px;
+    font-size: 14px;
     position: relative;
+    color: $link-main-color;
+    background: $nav-background-color;
+    border: 2px solid $nav-border-color;
+    border-radius: 2px;
 
     &:hover {
       cursor: pointer;
+      border-color: $button--hover;
+    }
+
+    &.random-button {
+      width: 32px;
+      height: 32px;
+      margin-left: 6px;
     }
 
     &.settings-button {
-      color: $link-main-color;
-      background: $nav-background-color;
-      border: 2px solid $nav-border-color;
-      border-radius: 2px;
+      width: 150px;
 
       &.reset {
-        color: red;
-      }
-
-      &:hover {
-        cursor: pointer;
-        border-color: black;
+        width: 90px;
+        color: $button--reset;
       }
     }
   }
@@ -720,9 +758,10 @@
       .color-preview {
         display: inline-block;
         margin-left: 6px;
-        width: 31px;
-        height: 31px;
-        border: 1px solid $nav-border-color;
+        width: 32px;
+        height: 32px;
+        border: 2px solid $nav-border-color;
+        border-radius: 2px;
 
         &::before {
           content: ' ';
@@ -782,7 +821,7 @@
 
             &:hover {
               cursor: pointer;
-              border-color: black;
+              border-color: $button--hover;
             }
 
             &:checked {
@@ -799,11 +838,13 @@
           }
 
           &[type="file"] {
-            width: 205px;
+            width: 185px;
           }
 
           &[type="text"] {
+            font-size: 14px;
             width: 185px;
+            height: 32px;
           }
         }
 
@@ -828,7 +869,7 @@
       .vc-chrome {
         position: absolute;
         z-index: 10;
-        left: 125px;
+        left: 135px;
         top: -1px;
       }
     }
@@ -846,8 +887,6 @@
       transition: font-size 0.75s ease-in-out;
 
       &:hover {
-        cursor: pointer;
-        border-color: black;
         color: $link-main-color--hover;
         font-size: 24px;
       }
