@@ -94,7 +94,7 @@ module.exports = {
       name: 'Additional Settings',
       customPatch: 'Custom Patch',
       customLogic: 'Custom Logic',
-      seedNumber: 'Seed Number',
+      seedNumber: 'Seed #',
     },
     randomize: 'Randomize!',
   },

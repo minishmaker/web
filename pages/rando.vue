@@ -348,7 +348,7 @@
               class="color-preview" />
             <button
               class="random-button"
-              @click="randomizeColorPicker('tunicColor')">
+              @click.prevent="randomizeColorPicker('tunicColor')">
               🎲
             </button>
           </div>
@@ -368,7 +368,7 @@
               class="color-preview" />
             <button
               class="random-button"
-              @click="randomizeColorPicker('splitBarColor')">
+              @click.prevent="randomizeColorPicker('splitBarColor')">
               🎲
             </button>
           </div>
@@ -390,7 +390,7 @@
               class="color-preview" />
             <button
               class="random-button"
-              @click="randomizeColorPicker('heartColor')">
+              @click.prevent="randomizeColorPicker('heartColor')">
               🎲
             </button>
           </div>
@@ -463,14 +463,22 @@
           </h3>
 
           <div class="options-group">
-            <label for="opPatchFile">
-              {{ $t('rando.additional.customPatch') }}
+            <label for="opSeed">
+              {{ $t('rando.additional.seedNumber') }}
             </label>
             <input
-              id="opPatchFile"
-              ref="opPatchFile"
-              name="opPatchFile"
-              type="file" />
+              id="opSeed"
+              ref="opSeed"
+              v-model="settings.seed"
+              type="text"
+              name="opSeed"
+              title="Numbers only"
+              pattern="[0-9]+" />
+            <button
+              class="random-button"
+              @click.prevent="randomizeSeed()">
+              🎲
+            </button>
           </div>
 
           <div class="options-group">
@@ -485,22 +493,14 @@
           </div>
 
           <div class="options-group">
-            <label for="opSeed">
-              {{ $t('rando.additional.seedNumber') }}
+            <label for="opPatchFile">
+              {{ $t('rando.additional.customPatch') }}
             </label>
             <input
-              id="opSeed"
-              v-model="settings.seed"
-              ref="opSeed"
-              type="text"
-              name="opSeed"
-              title="Numbers only"
-              pattern="[0-9]+" />
-            <button
-              class="random-button"
-              @click="randomizeSeed()">
-              🎲
-            </button>
+              id="opPatchFile"
+              ref="opPatchFile"
+              name="opPatchFile"
+              type="file" />
           </div>
         </section>
 
@@ -514,6 +514,9 @@
 </template>
 
 <script>
+  import {
+    cloneDeep,
+  } from 'lodash';
   import {
     Chrome as ChromeColorPicker,
   } from 'vue-color';
@@ -621,7 +624,30 @@
         await this.$axios.$post('api/check_rom', formData, headerData);
       },
       generateSettingsString() {
-
+        const copiedSettings = cloneDeep(this.settings);
+        copiedSettings.tunicColor = this.convertHexToRGB(copiedSettings.tunicColor);
+        copiedSettings.splitBarColor = this.convertHexToRGB(copiedSettings.splitBarColor);
+        copiedSettings.heartColor = this.convertHexToRGB(copiedSettings.heartColor);
+        console.log(copiedSettings);
+      },
+      // Parses each double hex value into base 16 and rounds resulting number to nearest 8 multiple
+      convertHexToRGB(hex) {
+        const result = /^#([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/.exec(hex);
+        return {
+          r: this.roundToNearestEight(parseInt(result[1], 16)),
+          g: this.roundToNearestEight(parseInt(result[2], 16)),
+          b: this.roundToNearestEight(parseInt(result[3], 16)),
+        };
+      },
+      roundToNearestEight(num) {
+        const remain = num % 8;
+        if (remain === 0) {
+          return num;
+        }
+        const adding = remain > 3
+          ? (8 - remain)
+          : -remain;
+        return num + adding;
       },
       updateColorPicker(name, val) {
         this.settings[name] = val.hex;

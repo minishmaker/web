@@ -9,8 +9,8 @@
       <a
         href="https://github.com/minishmaker"
         target="_blank">
-        found here
-      </a>.
+        found here.
+      </a>
       <div
         v-show="latestRelease.id"
         class="release">
