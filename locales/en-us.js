@@ -96,6 +96,7 @@ module.exports = {
       customLogic: 'Custom Logic',
       seedNumber: 'Seed #',
     },
+    romLabel: 'Minish Cap rom (EU)',
     randomize: 'Randomize!',
   },
 };

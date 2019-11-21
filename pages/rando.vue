@@ -504,10 +504,23 @@
           </div>
         </section>
 
-        <input
-          class="rando-submit"
-          type="submit"
-          :value="$t('rando.randomize')" />
+        <section class="rom-randomize">
+          <div class="options-group">
+            <label for="rom">
+              {{ $t('rando.romLabel') }}
+            </label>
+            <input
+              ref="romInput"
+              required
+              name="romFile"
+              type="file" />
+          </div>
+
+          <input
+            class="rando-submit"
+            type="submit"
+            :value="$t('rando.randomize')" />
+        </section>
       </form>
     </section>
   </div>
@@ -628,6 +641,14 @@
         copiedSettings.tunicColor = this.convertHexToRGB(copiedSettings.tunicColor);
         copiedSettings.splitBarColor = this.convertHexToRGB(copiedSettings.splitBarColor);
         copiedSettings.heartColor = this.convertHexToRGB(copiedSettings.heartColor);
+        copiedSettings.elementPed = parseInt(copiedSettings.elementPed, 10);
+        copiedSettings.follower = parseInt(copiedSettings.follower, 10);
+        copiedSettings.fuzziness = parseInt(copiedSettings.fuzziness, 10);
+        copiedSettings.kinstoneFusion = parseInt(copiedSettings.kinstoneFusion, 10);
+        copiedSettings.kinstoneFusionSkips = parseInt(copiedSettings.kinstoneFusionSkips, 10);
+        copiedSettings.openDHC = parseInt(copiedSettings.openDHC, 10);
+        copiedSettings.seed = parseInt(copiedSettings.seed, 10);
+        copiedSettings.swordPed = parseInt(copiedSettings.swordPed, 10);
         console.log(copiedSettings);
       },
       // Parses each double hex value into base 16 and rounds resulting number to nearest 8 multiple
@@ -774,6 +795,7 @@
 
     .options-container {
       display: flex;
+      flex: 100%;
       flex-flow: row wrap;
       justify-content: space-between;
       position: relative;
@@ -897,6 +919,19 @@
         z-index: 10;
         left: 135px;
         top: -1px;
+      }
+    }
+
+    .rom-randomize {
+      display: flex;
+      flex: 100%;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+
+      input[type="file"] {
+        width: 200px;
+        font-size: 14px;
       }
     }
 
