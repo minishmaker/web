@@ -187,14 +187,14 @@
           <div :class="['options-group', raceMode ? 'disabled' : '']">
             <label for="opKinstoneFusion">
               {{ $t('rando.seed.kinstoneFusions.name') }}
-              <tooltip>
+              <tooltip shift-right>
                 <template v-if="settings.kinstoneFusion == '0'">
                   All of the non-gold kinstone fusions in the game are disabled. don’t worry you don’t need to do any of them to beat the game.
                 </template>
-                <template v-if="settings.kinstoneFusion == '1'">
+                <template v-else-if="settings.kinstoneFusion == '1'">
                   All the non-gold kinstone fusions have been auto-completed, and all the item locations behind those fusions are available to collect.
                 </template>
-                <template v-if="settings.kinstoneFusion == '2'">
+                <template v-else-if="settings.kinstoneFusion == '2'">
                   All the non-gold kinstone fusions can be activated like normal, however there is no logic for this yet so you will never be considered to do fusion trades to access items.
                 </template>
               </tooltip>
@@ -222,14 +222,14 @@
             :class="['options-group', raceMode ? 'disabled' : '']">
             <label for="opKinstoneFusionSkips">
               {{ $t('rando.seed.skipFusions.name') }}
-              <tooltip>
+              <tooltip shift-right>
                 <template v-if="settings.kinstoneFusionSkips == '0'">
                   The cutscenes for each  of the non-gold kinstone fusions in the game can be skipped by pressing a button during the cutscene.
                 </template>
-                <template v-if="settings.kinstoneFusionSkips == '1'">
+                <template v-else-if="settings.kinstoneFusionSkips == '1'">
                   The cutscenes for all the non-gold kinstone fusions will instantly skip once you trigger the fusion.
                 </template>
-                <template v-if="settings.kinstoneFusionSkips == '2'">
+                <template v-else-if="settings.kinstoneFusionSkips == '2'">
                   None of the non-gold kinstone fusion cutscenes can be skipped.
                 </template>
               </tooltip>
@@ -255,17 +255,17 @@
           <div :class="['options-group', raceMode ? 'disabled' : '']">
             <label for="opOpenDHC">
               {{ $t('rando.seed.openDHC.name') }}
-              <tooltip>
+              <tooltip shift-right>
                 <template v-if="settings.openDHC == '0'">
                   Going to the pedestal in the basement of hyrule with the required items opens DHC, then you complete DHC and beat Vaati like normal.
                 </template>
-                <template v-if="settings.openDHC == '1'">
+                <template v-else-if="settings.openDHC == '1'">
                   Going to the pedestal in the basement of hyrule castle with the required items finishes the game, no need to complete DHC or kill vaati.
                 </template>
-                <template v-if="settings.openDHC == '2'">
+                <template v-else-if="settings.openDHC == '2'">
                   DHC is open from the start of the game, the pedestal does nothing.
                 </template>
-                <template v-if="settings.openDHC == '3'">
+                <template v-else-if="settings.openDHC == '3'">
                   DHC is open from the start of the game with the pedestal having three items obtained progressively after 2, 3, and 4 elements.
                 </template>
               </tooltip>
@@ -296,23 +296,23 @@
             :class="['options-group', raceMode ? 'disabled' : '']">
             <label for="opSwordPed">
               {{ $t('rando.seed.swordPed.name') }}
-              <tooltip>
+              <tooltip shift-right>
                 <template v-if="settings.openDHC == '0'">
                   Pedestal does not require any sword.
                 </template>
-                <template v-if="settings.openDHC == '1'">
+                <template v-else-if="settings.openDHC == '1'">
                   Pedestal requires the smith (1st) sword or higher.
                 </template>
-                <template v-if="settings.openDHC == '2'">
+                <template v-else-if="settings.openDHC == '2'">
                   Pedestal requires the white (2nd) sword or higher.
                 </template>
-                <template v-if="settings.openDHC == '3'">
+                <template v-else-if="settings.openDHC == '3'">
                   Pedestal requires the red (3rd) sword or higher.
                 </template>
-                <template v-if="settings.openDHC == '4'">
+                <template v-else-if="settings.openDHC == '4'">
                   Pedestal requires the blue (4th) sword or higher.
                 </template>
-                <template v-if="settings.openDHC == '5'">
+                <template v-else-if="settings.openDHC == '5'">
                   Pedestal requires the four (5th) sword.
                 </template>
               </tooltip>
@@ -349,20 +349,20 @@
             :class="['options-group', raceMode ? 'disabled' : '']">
             <label for="opElementPed">
               {{ $t('rando.seed.elementPed.name') }}
-              <tooltip>
+              <tooltip shift-right>
                 <template v-if="settings.openDHC == '0'">
                   Pedestal requires all 4 elements.
                 </template>
-                <template v-if="settings.openDHC == '1'">
+                <template v-else-if="settings.openDHC == '1'">
                   Pedestal requires 3 elements.
                 </template>
-                <template v-if="settings.openDHC == '2'">
+                <template v-else-if="settings.openDHC == '2'">
                   Pedestal requires 2 elements.
                 </template>
-                <template v-if="settings.openDHC == '3'">
+                <template v-else-if="settings.openDHC == '3'">
                   Pedestal requires 1 element.
                 </template>
-                <template v-if="settings.openDHC == '4'">
+                <template v-else-if="settings.openDHC == '4'">
                   Pedestal requires no elements.
                 </template>
               </tooltip>
@@ -486,7 +486,9 @@
           <div :class="['options-group', raceMode ? 'disabled' : '']">
             <label for="opFollower">
               {{ $t('rando.gimmick.follower.name') }}
-              <tooltip :caution="true">
+              <tooltip
+                caution
+                shift-right>
                 This feature is prone to graphical glitches and possible issues with gameplay. It has not been tested as well as the other features and are advised to exercise caution when enabling a follower.
               </tooltip>
             </label>
@@ -529,7 +531,9 @@
           <div :class="['options-group', raceMode ? 'disabled' : '']">
             <label for="opFuzziness">
               {{ $t('rando.gimmick.fuzziness') }}
-              <tooltip :caution="true">
+              <tooltip
+                caution
+                shift-right>
                 Adds the screen transition effect to the whole screen all the time, making everything blurry. <br /><br /> This can be seizure inducing! Please do not use this option if you are prone to seizures!
               </tooltip>
             </label>
