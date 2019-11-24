@@ -1,5 +1,5 @@
 <template>
-  <div :class="['tooltip', caution ? 'caution' : '']">
+  <div :class="{ tooltip: true, caution, 'shift-right': shiftRight }">
     <span>
       {{ caution ? '!' : '?' }}
     </span>
@@ -15,6 +15,11 @@
 
     props: {
       caution: {
+        type: Boolean,
+        required: false,
+        default: false,
+      },
+      shiftRight: {
         type: Boolean,
         required: false,
         default: false,
@@ -49,6 +54,10 @@
 
       .tooltip-text {
         border: 2px solid $caution-yellow;
+
+        &:after {
+          border-color: transparent transparent $caution-yellow transparent;
+        }
       }
     }
 
@@ -64,6 +73,26 @@
 
       .tooltip-text {
         border: 2px solid $help-blue;
+
+        &:after {
+          border-color: transparent transparent $help-blue transparent;
+        }
+      }
+    }
+
+    &:not(.shift-right) {
+      .tooltip-text {
+        &:after {
+          left: 18px;
+        }
+      }
+    }
+
+    &.shift-right {
+      .tooltip-text {
+        &:after {
+          left: 26px;
+        }
       }
     }
 
@@ -79,7 +108,7 @@
       font-weight: initial;
       visibility: hidden;
       position: absolute;
-      top: 140%;
+      top: 150%;
       margin-left: -20px;
       width: 320px;
       background-color: $nav-background-color;
@@ -90,16 +119,14 @@
       z-index: 1;
 
       // Arrow
-      // &:after {
-      //   content: ' ';
-      //   position: absolute;
-      //   bottom: 100%;
-      //   left: 18px;
-      //   margin-left: -8px;
-      //   border-width: 8px;
-      //   border-style: solid;
-      //   border-color: transparent transparent $help-blue transparent;
-      // }
+      &:after {
+        content: ' ';
+        position: absolute;
+        bottom: 100%;
+        margin-left: -8px;
+        border-width: 8px;
+        border-style: solid;
+      }
     }
   }
 </style>
