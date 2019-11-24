@@ -71,6 +71,9 @@
             <label for="opKeysanity">
               {{ $t('rando.seed.keysanity') }}
             </label>
+            <tooltip>
+              Keysanity is a version of the randomizer that shuffles dungeon items (small keys, big keys, maps and compasses) into the global item pool, so a key for the dungeon you are in could be found anywhere!
+            </tooltip>
           </div>
 
           <div class="options-group">
@@ -83,6 +86,9 @@
             <label for="opElementsInPool">
               {{ $t('rando.seed.elementsInPool') }}
             </label>
+            <tooltip>
+              Instead of the elements being rewards for completing certain dungeons, the elements can be found in any normal item location.
+            </tooltip>
           </div>
 
           <div class="options-group">
@@ -107,6 +113,9 @@
             <label for="opObscureSpots">
               {{ $t('rando.seed.obscureSpots') }}
             </label>
+            <tooltip>
+              This adds many additional item locations to the randomizer such as inside pots, digging the ground and diving underwater. There is an option to view these locations on the tracker.
+            </tooltip>
           </div>
 
           <div class="options-group">
@@ -131,6 +140,9 @@
             <label for="opNonSwordWeapons">
               {{ $t('rando.seed.nonSwordWeapons') }}
             </label>
+            <tooltip>
+              You can be expected to use the bow or bombs as a weapon in place of the sword for certain fights.
+            </tooltip>
           </div>
 
           <div class="options-group">
@@ -155,6 +167,9 @@
             <label for="opOneHitTimer">
               {{ $t('rando.gimmick.oneHitTimer') }}
             </label>
+            <tooltip>
+              When you start a seed with this enabled, you have a 30 minute timer that counts down. When it hits zero, you enter OHKO mode where you die to the next source of damage. Clocks are placed into the item pool that add time to the timer.
+            </tooltip>
           </div>
 
           <div class="options-group">
@@ -172,6 +187,17 @@
           <div :class="['options-group', raceMode ? 'disabled' : '']">
             <label for="opKinstoneFusion">
               {{ $t('rando.seed.kinstoneFusions.name') }}
+              <tooltip>
+                <template v-if="settings.kinstoneFusion == '0'">
+                  All of the non-gold kinstone fusions in the game are disabled. don’t worry you don’t need to do any of them to beat the game.
+                </template>
+                <template v-if="settings.kinstoneFusion == '1'">
+                  All the non-gold kinstone fusions have been auto-completed, and all the item locations behind those fusions are available to collect.
+                </template>
+                <template v-if="settings.kinstoneFusion == '2'">
+                  All the non-gold kinstone fusions can be activated like normal, however there is no logic for this yet so you will never be considered to do fusion trades to access items.
+                </template>
+              </tooltip>
             </label>
             <select
               id="opKinstoneFusion"
@@ -196,6 +222,17 @@
             :class="['options-group', raceMode ? 'disabled' : '']">
             <label for="opKinstoneFusionSkips">
               {{ $t('rando.seed.skipFusions.name') }}
+              <tooltip>
+                <template v-if="settings.kinstoneFusionSkips == '0'">
+                  The cutscenes for each  of the non-gold kinstone fusions in the game can be skipped by pressing a button during the cutscene.
+                </template>
+                <template v-if="settings.kinstoneFusionSkips == '1'">
+                  The cutscenes for all the non-gold kinstone fusions will instantly skip once you trigger the fusion.
+                </template>
+                <template v-if="settings.kinstoneFusionSkips == '2'">
+                  None of the non-gold kinstone fusion cutscenes can be skipped.
+                </template>
+              </tooltip>
             </label>
             <select
               id="opKinstoneFusionSkips"
@@ -218,6 +255,20 @@
           <div :class="['options-group', raceMode ? 'disabled' : '']">
             <label for="opOpenDHC">
               {{ $t('rando.seed.openDHC.name') }}
+              <tooltip>
+                <template v-if="settings.openDHC == '0'">
+                  Going to the pedestal in the basement of hyrule with the required items opens DHC, then you complete DHC and beat Vaati like normal.
+                </template>
+                <template v-if="settings.openDHC == '1'">
+                  Going to the pedestal in the basement of hyrule castle with the required items finishes the game, no need to complete DHC or kill vaati.
+                </template>
+                <template v-if="settings.openDHC == '2'">
+                  DHC is open from the start of the game, the pedestal does nothing.
+                </template>
+                <template v-if="settings.openDHC == '3'">
+                  DHC is open from the start of the game with the pedestal having three items obtained progressively after 2, 3, and 4 elements.
+                </template>
+              </tooltip>
             </label>
             <select
               id="opOpenDHC"
@@ -245,6 +296,26 @@
             :class="['options-group', raceMode ? 'disabled' : '']">
             <label for="opSwordPed">
               {{ $t('rando.seed.swordPed.name') }}
+              <tooltip>
+                <template v-if="settings.openDHC == '0'">
+                  Pedestal does not require any sword.
+                </template>
+                <template v-if="settings.openDHC == '1'">
+                  Pedestal requires the smith (1st) sword or higher.
+                </template>
+                <template v-if="settings.openDHC == '2'">
+                  Pedestal requires the white (2nd) sword or higher.
+                </template>
+                <template v-if="settings.openDHC == '3'">
+                  Pedestal requires the red (3rd) sword or higher.
+                </template>
+                <template v-if="settings.openDHC == '4'">
+                  Pedestal requires the blue (4th) sword or higher.
+                </template>
+                <template v-if="settings.openDHC == '5'">
+                  Pedestal requires the four (5th) sword.
+                </template>
+              </tooltip>
             </label>
             <select
               id="opSwordPed"
@@ -278,6 +349,23 @@
             :class="['options-group', raceMode ? 'disabled' : '']">
             <label for="opElementPed">
               {{ $t('rando.seed.elementPed.name') }}
+              <tooltip>
+                <template v-if="settings.openDHC == '0'">
+                  Pedestal requires all 4 elements.
+                </template>
+                <template v-if="settings.openDHC == '1'">
+                  Pedestal requires 3 elements.
+                </template>
+                <template v-if="settings.openDHC == '2'">
+                  Pedestal requires 2 elements.
+                </template>
+                <template v-if="settings.openDHC == '3'">
+                  Pedestal requires 1 element.
+                </template>
+                <template v-if="settings.openDHC == '4'">
+                  Pedestal requires no elements.
+                </template>
+              </tooltip>
             </label>
             <select
               id="opElementPed"
@@ -398,6 +486,9 @@
           <div :class="['options-group', raceMode ? 'disabled' : '']">
             <label for="opFollower">
               {{ $t('rando.gimmick.follower.name') }}
+              <tooltip :caution="true">
+                This feature is prone to graphical glitches and possible issues with gameplay. It has not been tested as well as the other features and are advised to exercise caution when enabling a follower.
+              </tooltip>
             </label>
             <select
               id="opFollower"
@@ -438,6 +529,9 @@
           <div :class="['options-group', raceMode ? 'disabled' : '']">
             <label for="opFuzziness">
               {{ $t('rando.gimmick.fuzziness') }}
+              <tooltip :caution="true">
+                Adds the screen transition effect to the whole screen all the time, making everything blurry. <br /><br /> This can be seizure inducing! Please do not use this option if you are prone to seizures!
+              </tooltip>
             </label>
             <span>
               None&nbsp;
@@ -534,6 +628,8 @@
     Chrome as ChromeColorPicker,
   } from 'vue-color';
 
+  import Tooltip from '@/components/Tooltip.vue';
+
   const headerData = {
     headers: {
       'Content-Type': 'multipart/form-data',
@@ -585,6 +681,7 @@
 
     components: {
       ChromeColorPicker,
+      Tooltip,
     },
 
     data() {
@@ -740,231 +837,5 @@
 </script>
 
 <style lang="scss" scoped>
-  @import '~@/assets/global-styles';
-
-  .page-img {
-    max-width: 230px;
-  }
-
-  .settings-buttons-container {
-    display: flex;
-    justify-content: space-between;
-    margin: 8px 16px;
-
-    div {
-      display: inline-block;
-    }
-  }
-
-  button {
-    width: 140px;
-    height: 32px;
-    padding: 5px;
-    font-size: 14px;
-    position: relative;
-    color: $link-main-color;
-    background: $nav-background-color;
-    border: 2px solid $nav-border-color;
-    border-radius: 2px;
-
-    &:hover {
-      cursor: pointer;
-      border-color: $button--hover;
-    }
-
-    &.random-button {
-      width: 32px;
-      height: 32px;
-      margin-left: 6px;
-    }
-
-    &.settings-button {
-      width: 150px;
-
-      &.reset {
-        width: 90px;
-        color: $button--reset;
-      }
-    }
-  }
-
-  .options-form {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
-
-    .options-container {
-      display: flex;
-      flex: 100%;
-      flex-flow: row wrap;
-      justify-content: space-between;
-      position: relative;
-      margin: 16px;
-      padding: 12px;
-      border: 1px solid $nav-border-color;
-
-      .color-preview {
-        display: inline-block;
-        margin-left: 6px;
-        width: 32px;
-        height: 32px;
-        border: 2px solid $nav-border-color;
-        border-radius: 2px;
-
-        &::before {
-          content: ' ';
-        }
-      }
-
-      .options-title {
-        position: absolute;
-        background: $site-background-color;
-        padding: 2px 10px;
-        top: calc(-1rem + 1px);
-      }
-
-      .options-group {
-        display: flex;
-        align-items: center;
-        padding: 4px;
-        padding-right: 12px;
-
-        &.disabled {
-          & > * {
-            color: $nav-border-color;
-          }
-
-          label, input[type="range"], span {
-            &:hover {
-              cursor: not-allowed;
-            }
-          }
-        }
-
-        input {
-          &[type="checkbox"] {
-            -webkit-appearance:none;
-            border: 2px solid $nav-border-color;
-            border-radius: 2px;
-            width: 16px;
-            height: 16px;
-            margin-right: 4px;
-
-            &:disabled {
-              border-color: $nav-background-color;
-
-              & + label {
-                color: $nav-border-color;
-
-                &:hover {
-                  cursor: not-allowed;
-                }
-              }
-
-              &:hover {
-                border-color: $nav-background-color;
-                cursor: not-allowed;
-              }
-            }
-
-            &:hover {
-              cursor: pointer;
-              border-color: $button--hover;
-            }
-
-            &:checked {
-              background: $link-main-color;
-            }
-
-            & + label {
-              flex-grow: unset;
-
-              &:hover {
-                cursor: pointer;
-              }
-            }
-          }
-
-          &[type="file"] {
-            width: 185px;
-          }
-
-          &[type="text"] {
-            font-size: 14px;
-            width: 185px;
-            height: 32px;
-          }
-        }
-
-        select {
-          width: 185px;
-          padding: 2px;
-
-          &:disabled {
-            &:hover {
-              cursor: not-allowed;
-            }
-          }
-        }
-
-        label {
-          text-align:left;
-          flex-grow: 1;
-          padding-right: 10px;
-        }
-      }
-
-      .vc-chrome {
-        position: absolute;
-        z-index: 10;
-        left: 135px;
-        top: -1px;
-      }
-    }
-
-    .rom-randomize {
-      display: flex;
-      flex: 100%;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-
-      input[type="file"] {
-        width: 200px;
-        font-size: 14px;
-      }
-    }
-
-    .rando-submit {
-      width: 225px;
-      height: 50px;
-      font-size: 22px;
-      color: $link-main-color;
-      background: $nav-background-color;
-      border: 2px solid $nav-border-color;
-      border-radius: 8px;
-
-      transition: color 0.75s ease-in-out;
-      transition: font-size 0.75s ease-in-out;
-
-      &:hover {
-        color: $link-main-color--hover;
-        font-size: 24px;
-      }
-    }
-  }
-
-  @media only screen and (max-width: 1599px) {
-    .options-group {
-      flex: 50%;
-      max-width: 50%;
-    }
-  }
-
-  @media only screen and (min-width: 1600px) {
-    .options-group {
-      flex: 33%;
-      max-width: 33%;
-    }
-  }
+  @import '~@/assets/rando-styles';
 </style>
