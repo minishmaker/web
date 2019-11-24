@@ -5,32 +5,6 @@
       src="~/assets/Princess_Zelda.png"
       alt="Picture of Princess Zelda from Minish Cap" />
     <section class="sub-container">
-      <!-- <form
-        ref="romInputForm"
-        class="rom-upload"
-        @submit.prevent="uploadTest">
-        <label for="rom">
-          Upload your Minish Cap .gba file
-        </label>
-        <input
-          ref="romInput"
-          required
-          name="romFile"
-          type="file" />
-        <input
-          class="rom-submit"
-          type="submit"
-          value="Submit" />
-      </form>
-      <span v-if="loading">
-        Loading...
-      </span>
-      <span v-if="uploadOk">
-        Upload ok! :D
-      </span>
-      <span v-if="uploadFail">
-        Upload fail... :c
-      </span> -->
       <section class="settings-buttons-container">
         <div>
           <button
@@ -422,7 +396,9 @@
           </div>
 
           <div class="options-group">
-            <button @click.prevent.self="showTunicColorPicker = !showTunicColorPicker">
+            <button
+              @click.prevent.self="showTunicColorPicker = !showTunicColorPicker"
+              v-on-clickaway="closeTunicColorPicker">
               {{ showTunicColorPicker ? $t('rando.gimmick.done') : $t('rando.gimmick.tunicColor') }}
               <no-ssr>
                 <chrome-color-picker
@@ -442,7 +418,9 @@
           </div>
 
           <div class="options-group">
-            <button @click.prevent.self="showSplitBarColorPicker = !showSplitBarColorPicker">
+            <button
+              @click.prevent.self="showSplitBarColorPicker = !showSplitBarColorPicker"
+              v-on-clickaway="closeSplitBarColorPicker">
               {{ showSplitBarColorPicker ? $t('rando.gimmick.done') : $t('rando.gimmick.splitBarColor') }}
               <no-ssr>
                 <chrome-color-picker
@@ -464,7 +442,9 @@
           <div
             v-show="!settings.rainbowHearts"
             class="options-group">
-            <button @click.prevent.self="showHeartColorPicker = !showHeartColorPicker">
+            <button
+              @click.prevent.self="showHeartColorPicker = !showHeartColorPicker"
+              v-on-clickaway="closeHeartColorPicker">
               {{ showHeartColorPicker ? $t('rando.gimmick.done') : $t('rando.gimmick.heartColor') }}
               <no-ssr>
                 <chrome-color-picker
@@ -631,6 +611,9 @@
   import {
     Chrome as ChromeColorPicker,
   } from 'vue-color';
+  import {
+    mixin as clickaway,
+  } from 'vue-clickaway';
 
   import Tooltip from '@/components/Tooltip.vue';
 
@@ -687,6 +670,10 @@
       ChromeColorPicker,
       Tooltip,
     },
+
+    mixins: [
+      clickaway,
+    ],
 
     data() {
       return {
@@ -775,6 +762,9 @@
         this.settings[name] = val.hex;
         this.$refs[`${name}Preview`].style.backgroundColor = val.hex;
       },
+      closeTunicColorPicker(name) { this.showTunicColorPicker = false; },
+      closeSplitBarColorPicker(name) { this.showSplitBarColorPicker = false; },
+      closeHeartColorPicker(name) { this.showHeartColorPicker = false; },
       setRaceSettings() {
         this.setDefaultSettings();
         this.settings.trapsInItemPool = true;
