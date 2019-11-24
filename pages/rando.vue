@@ -46,7 +46,7 @@
               {{ $t('rando.seed.keysanity') }}
             </label>
             <tooltip>
-              Keysanity is a version of the randomizer that shuffles dungeon items (small keys, big keys, maps and compasses) into the global item pool, so a key for the dungeon you are in could be found anywhere!
+              {{ $t('rando.seed.keysanityTooltip') }}
             </tooltip>
           </div>
 
@@ -61,7 +61,7 @@
               {{ $t('rando.seed.elementsInPool') }}
             </label>
             <tooltip>
-              Instead of the elements being rewards for completing certain dungeons, the elements can be found in any normal item location.
+              {{ $t('rando.seed.elementsInPoolTooltip') }}
             </tooltip>
           </div>
 
@@ -88,7 +88,7 @@
               {{ $t('rando.seed.obscureSpots') }}
             </label>
             <tooltip>
-              This adds many additional item locations to the randomizer such as inside pots, digging the ground and diving underwater. There is an option to view these locations on the tracker.
+              {{ $t('rando.seed.obscureSpotsTooltip') }}
             </tooltip>
           </div>
 
@@ -115,7 +115,7 @@
               {{ $t('rando.seed.nonSwordWeapons') }}
             </label>
             <tooltip>
-              You can be expected to use the bow or bombs as a weapon in place of the sword for certain fights.
+              {{ $t('rando.seed.nonSwordWeaponsTooltip') }}
             </tooltip>
           </div>
 
@@ -139,10 +139,10 @@
               type="checkbox"
               name="opOneHitTimer" />
             <label for="opOneHitTimer">
-              {{ $t('rando.gimmick.oneHitTimer') }}
+              {{ $t('rando.seed.oneHitTimer') }}
             </label>
             <tooltip>
-              When you start a seed with this enabled, you have a 30 minute timer that counts down. When it hits zero, you enter OHKO mode where you die to the next source of damage. Clocks are placed into the item pool that add time to the timer.
+              {{ $t('rando.seed.oneHitTimerTooltip') }}
             </tooltip>
           </div>
 
@@ -158,18 +158,18 @@
             </label>
           </div>
 
-          <div :class="['options-group', raceMode ? 'disabled' : '']">
+          <div :class="{ 'options-group': true, disabled: raceMode }">
             <label for="opKinstoneFusion">
               {{ $t('rando.seed.kinstoneFusions.name') }}
               <tooltip shift-right>
                 <template v-if="settings.kinstoneFusion == '0'">
-                  All of the non-gold kinstone fusions in the game are disabled. don’t worry you don’t need to do any of them to beat the game.
+                  {{ $t('rando.seed.kinstoneFusions.option1Tooltip') }}
                 </template>
                 <template v-else-if="settings.kinstoneFusion == '1'">
-                  All the non-gold kinstone fusions have been auto-completed, and all the item locations behind those fusions are available to collect.
+                  {{ $t('rando.seed.kinstoneFusions.option2Tooltip') }}
                 </template>
                 <template v-else-if="settings.kinstoneFusion == '2'">
-                  All the non-gold kinstone fusions can be activated like normal, however there is no logic for this yet so you will never be considered to do fusion trades to access items.
+                  {{ $t('rando.seed.kinstoneFusions.option3Tooltip') }}
                 </template>
               </tooltip>
             </label>
@@ -193,18 +193,18 @@
 
           <div
             v-show="settings.kinstoneFusion == '2'"
-            :class="['options-group', raceMode ? 'disabled' : '']">
+            :class="{ 'options-group': true, disabled: raceMode }">
             <label for="opKinstoneFusionSkips">
               {{ $t('rando.seed.skipFusions.name') }}
               <tooltip shift-right>
                 <template v-if="settings.kinstoneFusionSkips == '0'">
-                  The cutscenes for each  of the non-gold kinstone fusions in the game can be skipped by pressing a button during the cutscene.
+                  {{ $t('rando.seed.skipFusions.option1Tooltip') }}
                 </template>
                 <template v-else-if="settings.kinstoneFusionSkips == '1'">
-                  The cutscenes for all the non-gold kinstone fusions will instantly skip once you trigger the fusion.
+                  {{ $t('rando.seed.skipFusions.option2Tooltip') }}
                 </template>
                 <template v-else-if="settings.kinstoneFusionSkips == '2'">
-                  None of the non-gold kinstone fusion cutscenes can be skipped.
+                  {{ $t('rando.seed.skipFusions.option3Tooltip') }}
                 </template>
               </tooltip>
             </label>
@@ -226,21 +226,21 @@
             </select>
           </div>
 
-          <div :class="['options-group', raceMode ? 'disabled' : '']">
+          <div :class="{ 'options-group': true, disabled: raceMode }">
             <label for="opOpenDHC">
               {{ $t('rando.seed.openDHC.name') }}
               <tooltip shift-right>
                 <template v-if="settings.openDHC == '0'">
-                  Going to the pedestal in the basement of hyrule with the required items opens DHC, then you complete DHC and beat Vaati like normal.
+                  {{ $t('rando.seed.openDHC.option1Tooltip') }}
                 </template>
                 <template v-else-if="settings.openDHC == '1'">
-                  Going to the pedestal in the basement of hyrule castle with the required items finishes the game, no need to complete DHC or kill vaati.
+                  {{ $t('rando.seed.openDHC.option2Tooltip') }}
                 </template>
                 <template v-else-if="settings.openDHC == '2'">
-                  DHC is open from the start of the game, the pedestal does nothing.
+                  {{ $t('rando.seed.openDHC.option3Tooltip') }}
                 </template>
                 <template v-else-if="settings.openDHC == '3'">
-                  DHC is open from the start of the game with the pedestal having three items obtained progressively after 2, 3, and 4 elements.
+                  {{ $t('rando.seed.openDHC.option4Tooltip') }}
                 </template>
               </tooltip>
             </label>
@@ -267,27 +267,27 @@
 
           <div
             v-show="parseInt(settings.openDHC, 10) < 2"
-            :class="['options-group', raceMode ? 'disabled' : '']">
+            :class="{ 'options-group': true, disabled: raceMode }">
             <label for="opSwordPed">
               {{ $t('rando.seed.swordPed.name') }}
               <tooltip shift-right>
-                <template v-if="settings.openDHC == '0'">
-                  Pedestal does not require any sword.
+                <template v-if="settings.swordPed == '0'">
+                  {{ $t('rando.seed.swordPed.option1Tooltip') }}
                 </template>
-                <template v-else-if="settings.openDHC == '1'">
-                  Pedestal requires the smith (1st) sword or higher.
+                <template v-else-if="settings.swordPed == '1'">
+                  {{ $t('rando.seed.swordPed.option2Tooltip') }}
                 </template>
-                <template v-else-if="settings.openDHC == '2'">
-                  Pedestal requires the white (2nd) sword or higher.
+                <template v-else-if="settings.swordPed == '2'">
+                  {{ $t('rando.seed.swordPed.option3Tooltip') }}
                 </template>
-                <template v-else-if="settings.openDHC == '3'">
-                  Pedestal requires the red (3rd) sword or higher.
+                <template v-else-if="settings.swordPed == '3'">
+                  {{ $t('rando.seed.swordPed.option4Tooltip') }}
                 </template>
-                <template v-else-if="settings.openDHC == '4'">
-                  Pedestal requires the blue (4th) sword or higher.
+                <template v-else-if="settings.swordPed == '4'">
+                  {{ $t('rando.seed.swordPed.option5Tooltip') }}
                 </template>
-                <template v-else-if="settings.openDHC == '5'">
-                  Pedestal requires the four (5th) sword.
+                <template v-else-if="settings.swordPed == '5'">
+                  {{ $t('rando.seed.swordPed.option6Tooltip') }}
                 </template>
               </tooltip>
             </label>
@@ -320,24 +320,24 @@
 
           <div
             v-show="parseInt(settings.openDHC, 10) < 2"
-            :class="['options-group', raceMode ? 'disabled' : '']">
+            :class="{ 'options-group': true, disabled: raceMode }">
             <label for="opElementPed">
               {{ $t('rando.seed.elementPed.name') }}
               <tooltip shift-right>
-                <template v-if="settings.openDHC == '0'">
-                  Pedestal requires all 4 elements.
+                <template v-if="settings.elementPed == '0'">
+                  {{ $t('rando.seed.elementPed.option1Tooltip') }}
                 </template>
-                <template v-else-if="settings.openDHC == '1'">
-                  Pedestal requires 3 elements.
+                <template v-else-if="settings.elementPed == '1'">
+                  {{ $t('rando.seed.elementPed.option2Tooltip') }}
                 </template>
-                <template v-else-if="settings.openDHC == '2'">
-                  Pedestal requires 2 elements.
+                <template v-else-if="settings.elementPed == '2'">
+                  {{ $t('rando.seed.elementPed.option3Tooltip') }}
                 </template>
-                <template v-else-if="settings.openDHC == '3'">
-                  Pedestal requires 1 element.
+                <template v-else-if="settings.elementPed == '3'">
+                  {{ $t('rando.seed.elementPed.option4Tooltip') }}
                 </template>
-                <template v-else-if="settings.openDHC == '4'">
-                  Pedestal requires no elements.
+                <template v-else-if="settings.elementPed == '4'">
+                  {{ $t('rando.seed.elementPed.option5Tooltip') }}
                 </template>
               </tooltip>
             </label>
@@ -397,8 +397,8 @@
 
           <div class="options-group">
             <button
-              @click.prevent.self="showTunicColorPicker = !showTunicColorPicker"
-              v-on-clickaway="closeTunicColorPicker">
+              v-on-clickaway="closeTunicColorPicker"
+              @click.prevent.self="showTunicColorPicker = !showTunicColorPicker">
               {{ showTunicColorPicker ? $t('rando.gimmick.done') : $t('rando.gimmick.tunicColor') }}
               <no-ssr>
                 <chrome-color-picker
@@ -419,8 +419,8 @@
 
           <div class="options-group">
             <button
-              @click.prevent.self="showSplitBarColorPicker = !showSplitBarColorPicker"
-              v-on-clickaway="closeSplitBarColorPicker">
+              v-on-clickaway="closeSplitBarColorPicker"
+              @click.prevent.self="showSplitBarColorPicker = !showSplitBarColorPicker">
               {{ showSplitBarColorPicker ? $t('rando.gimmick.done') : $t('rando.gimmick.splitBarColor') }}
               <no-ssr>
                 <chrome-color-picker
@@ -443,8 +443,8 @@
             v-show="!settings.rainbowHearts"
             class="options-group">
             <button
-              @click.prevent.self="showHeartColorPicker = !showHeartColorPicker"
-              v-on-clickaway="closeHeartColorPicker">
+              v-on-clickaway="closeHeartColorPicker"
+              @click.prevent.self="showHeartColorPicker = !showHeartColorPicker">
               {{ showHeartColorPicker ? $t('rando.gimmick.done') : $t('rando.gimmick.heartColor') }}
               <no-ssr>
                 <chrome-color-picker
@@ -463,13 +463,13 @@
             </button>
           </div>
 
-          <div :class="['options-group', raceMode ? 'disabled' : '']">
+          <div :class="{ 'options-group': true, disabled: raceMode }">
             <label for="opFollower">
               {{ $t('rando.gimmick.follower.name') }}
               <tooltip
                 caution
                 shift-right>
-                This feature is prone to graphical glitches and possible issues with gameplay. It has not been tested as well as the other features and are advised to exercise caution when enabling a follower.
+                {{ $t('rando.gimmick.follower.warning') }}
               </tooltip>
             </label>
             <select
@@ -508,13 +508,13 @@
             </select>
           </div>
 
-          <div :class="['options-group', raceMode ? 'disabled' : '']">
+          <div :class="{ 'options-group': true, disabled: raceMode }">
             <label for="opFuzziness">
               {{ $t('rando.gimmick.fuzziness') }}
               <tooltip
                 caution
                 shift-right>
-                Adds the screen transition effect to the whole screen all the time, making everything blurry. <br /><br /> This can be seizure inducing! Please do not use this option if you are prone to seizures!
+                {{ $t('rando.gimmick.fuzzinessWarning') }}
               </tooltip>
             </label>
             <span>
