@@ -83,7 +83,7 @@
     &:not(.shift-right) {
       .tooltip-text {
         &:after {
-          left: 18px;
+          left: 58px;
         }
       }
     }
@@ -91,7 +91,7 @@
     &.shift-right {
       .tooltip-text {
         &:after {
-          left: 26px;
+          left: 66px;
         }
       }
     }
@@ -109,7 +109,7 @@
       visibility: hidden;
       position: absolute;
       top: 150%;
-      margin-left: -20px;
+      margin-left: -60px;
       width: 320px;
       background-color: $nav-background-color;
       color: black;
