@@ -123,6 +123,8 @@ module.exports = {
       customPatch: 'Custom Patch',
       customLogic: 'Custom Logic',
       seedNumber: 'Seed #',
+      mainSettingsString: 'Main Settings',
+      gimmickSettingsString: 'Gimmick Settings',
     },
     romLabel: 'Minish Cap rom (EU)',
     randomize: 'Randomize!',
