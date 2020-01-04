@@ -87,6 +87,16 @@ button {
       padding: 4px;
       padding-right: 12px;
 
+      &.wide {
+        label {
+          flex-grow: 0;
+        }
+
+        input {
+          flex-grow: 1;
+        }
+      }
+
       &.disabled {
         & > * {
           color: $nav-border-color;
@@ -189,6 +199,12 @@ button {
     justify-content: center;
     font-size: 18px;
 
+    input[type="submit"] {
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
     input[type="file"] {
       width: 200px;
       font-size: 14px;
@@ -218,6 +234,15 @@ button {
   .options-group {
     flex: 50%;
     max-width: 50%;
+
+    &.wide {
+      flex: 100%;
+      max-width:  100%;
+
+      label {
+        width: 151px;
+      }
+    }
   }
 }
 
@@ -225,5 +250,14 @@ button {
   .options-group {
     flex: 33%;
     max-width: 33%;
+
+    &.wide {
+      flex: 100%;
+      max-width:  100%;
+
+      label {
+        width: 177px;
+      }
+    }
   }
 }
