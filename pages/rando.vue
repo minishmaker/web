@@ -28,7 +28,7 @@
       <form
         ref="optionsForm"
         class="options-form"
-        @submit.prevent="generateSettingsString">
+        @submit.prevent="generateSettingsStrings">
         <!-- Main options -->
         <section class="options-container">
           <h3 class="options-title">
@@ -191,9 +191,7 @@
             </select>
           </div>
 
-          <div
-            v-show="settings.kinstoneFusion == '2'"
-            :class="{ 'options-group': true, disabled: raceMode }">
+          <div :class="{ 'options-group': true, disabled: raceMode || settings.kinstoneFusion != '2' }">
             <label for="opKinstoneFusionSkips">
               {{ $t('rando.seed.skipFusions.name') }}
               <tooltip shift-right>
@@ -211,7 +209,7 @@
             <select
               id="opKinstoneFusionSkips"
               v-model="settings.kinstoneFusionSkips"
-              :disabled="raceMode"
+              :disabled="raceMode || settings.kinstoneFusion != '2'"
               type="select"
               name="opKinstoneFusionSkips">
               <option value="0">
@@ -265,9 +263,7 @@
             </select>
           </div>
 
-          <div
-            v-show="parseInt(settings.openDHC, 10) < 2"
-            :class="{ 'options-group': true, disabled: raceMode }">
+          <div :class="{ 'options-group': true, disabled: raceMode || parseInt(settings.openDHC, 10) >= 2}">
             <label for="opSwordPed">
               {{ $t('rando.seed.swordPed.name') }}
               <tooltip shift-right>
@@ -294,7 +290,7 @@
             <select
               id="opSwordPed"
               v-model="settings.swordPed"
-              :disabled="raceMode"
+              :disabled="raceMode || parseInt(settings.openDHC, 10) >= 2"
               type="select"
               name="opSwordPed">
               <option value="0">
@@ -318,9 +314,7 @@
             </select>
           </div>
 
-          <div
-            v-show="parseInt(settings.openDHC, 10) < 2"
-            :class="{ 'options-group': true, disabled: raceMode }">
+          <div :class="{ 'options-group': true, disabled: raceMode || parseInt(settings.openDHC, 10) >= 2 }">
             <label for="opElementPed">
               {{ $t('rando.seed.elementPed.name') }}
               <tooltip shift-right>
@@ -344,7 +338,7 @@
             <select
               id="opElementPed"
               v-model="settings.elementPed"
-              :disabled="raceMode"
+              :disabled="raceMode || parseInt(settings.openDHC, 10) >= 2"
               type="select"
               name="opElementPed">
               <option value="0">
@@ -439,11 +433,10 @@
             </button>
           </div>
 
-          <div
-            v-show="!settings.rainbowHearts"
-            class="options-group">
+          <div class="options-group">
             <button
               v-on-clickaway="closeHeartColorPicker"
+              :disabled="settings.rainbowHearts"
               @click.prevent.self="showHeartColorPicker = !showHeartColorPicker">
               {{ showHeartColorPicker ? $t('rando.gimmick.done') : $t('rando.gimmick.heartColor') }}
               <no-ssr>
@@ -526,8 +519,8 @@
               :disabled="raceMode"
               type="range"
               name="opFuzziness"
-              min="-1"
-              max="14" />
+              min="0"
+              max="15" />
             <span>
               &nbsp;Max
             </span>
@@ -606,9 +599,6 @@
 
 <script>
   import {
-    cloneDeep,
-  } from 'lodash';
-  import {
     Chrome as ChromeColorPicker,
   } from 'vue-color';
   import {
@@ -616,16 +606,13 @@
   } from 'vue-clickaway';
 
   import Tooltip from '@/components/Tooltip.vue';
+  import * as Utils from '@/server/utils.js';
 
   const headerData = {
     headers: {
       'Content-Type': 'multipart/form-data',
     },
   };
-
-  function randomSeed() {
-    return Math.floor(Math.random() * 2147483647).toString();
-  }
 
   const defaultSettings = {
     keysanity: false,
@@ -636,20 +623,20 @@
     nonSwordWeapons: false,
     trapsInItemPool: false,
     oneHitTimer: false,
+    randomMusic: false,
     kinstoneFusion: '0',
     kinstoneFusionSkips: '0',
     openDHC: '0',
     swordPed: '0',
     elementPed: '0',
-    randomMusic: false,
     randomLanguage: false,
     rainbowHearts: false,
     tunicColor: '#10ff08',
     heartColor: '#ff5010',
     splitBarColor: '#4aff18',
     follower: '0',
-    fuzziness: '-1',
-    seed: randomSeed(),
+    fuzziness: '0',
+    seed: Utils.randomSeed(),
   };
 
   export default {
@@ -724,39 +711,12 @@
         formData.append('rom', file);
         await this.$axios.$post('api/check_rom', formData, headerData);
       },
-      generateSettingsString() {
-        const copiedSettings = cloneDeep(this.settings);
-        copiedSettings.tunicColor = this.convertHexToRGB(copiedSettings.tunicColor);
-        copiedSettings.splitBarColor = this.convertHexToRGB(copiedSettings.splitBarColor);
-        copiedSettings.heartColor = this.convertHexToRGB(copiedSettings.heartColor);
-        copiedSettings.elementPed = parseInt(copiedSettings.elementPed, 10);
-        copiedSettings.follower = parseInt(copiedSettings.follower, 10);
-        copiedSettings.fuzziness = parseInt(copiedSettings.fuzziness, 10);
-        copiedSettings.kinstoneFusion = parseInt(copiedSettings.kinstoneFusion, 10);
-        copiedSettings.kinstoneFusionSkips = parseInt(copiedSettings.kinstoneFusionSkips, 10);
-        copiedSettings.openDHC = parseInt(copiedSettings.openDHC, 10);
-        copiedSettings.seed = parseInt(copiedSettings.seed, 10);
-        copiedSettings.swordPed = parseInt(copiedSettings.swordPed, 10);
-        console.log(copiedSettings);
-      },
-      // Parses each double hex value into base 16 and rounds resulting number to nearest 8 multiple
-      convertHexToRGB(hex) {
-        const result = /^#([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/.exec(hex);
-        return {
-          r: this.roundToNearestEight(parseInt(result[1], 16)),
-          g: this.roundToNearestEight(parseInt(result[2], 16)),
-          b: this.roundToNearestEight(parseInt(result[3], 16)),
-        };
-      },
-      roundToNearestEight(num) {
-        const remain = num % 8;
-        if (remain === 0) {
-          return num;
-        }
-        const adding = remain > 3
-          ? (8 - remain)
-          : -remain;
-        return num + adding;
+      generateSettingsStrings() {
+        const parsedSettings = Utils.parseSettings(this.settings);
+        const encodedMainSettings = Utils.generateMainSettingsString(parsedSettings);
+        const encodedGimmickSettings = Utils.generateGimmickSettingsString(parsedSettings);
+        console.log(encodedMainSettings);
+        console.log(encodedGimmickSettings);
       },
       updateColorPicker(name, val) {
         this.settings[name] = val.hex;
@@ -781,45 +741,28 @@
       randomizeColorPicker(name) {
         this.updateColorPicker(name, { hex: this.randomColorHex(), });
       },
-      randomizeSeed() {
-        this.settings.seed = randomSeed();
-      },
-      randomBoolean() {
-        return !!Math.floor(Math.random() * 2);
-      },
-      randomNumberString(max) {
-        return Math.floor(Math.random() * max).toString();
-      },
-      randomColorHex() {
-        const chars = '0123456789abcdef';
-        let color = '#';
-        for (let i = 0; i < 6; i++) {
-          color += chars[Math.floor(Math.random() * chars.length)];
-        }
-        return color;
-      },
       setRandomSettings() {
         this.raceMode = false;
-        this.settings.keysanity = this.randomBoolean();
-        this.settings.elementsInPool = this.randomBoolean();
-        this.settings.disableGlitches = this.randomBoolean();
-        this.settings.obscureSpots = this.randomBoolean();
-        this.settings.rupeesInPool = this.randomBoolean();
-        this.settings.nonSwordWeapons = this.randomBoolean();
-        this.settings.trapsInItemPool = this.randomBoolean();
-        this.settings.oneHitTimer = this.randomBoolean();
-        this.settings.kinstoneFusion = this.randomNumberString(3);
-        this.settings.kinstoneFusionSkips = this.randomNumberString(3);
-        this.settings.openDHC = this.randomNumberString(4);
-        this.settings.swordPed = this.randomNumberString(6);
-        this.settings.elementPed = this.randomNumberString(5);
-        this.settings.randomMusic = this.randomBoolean();
-        this.settings.randomLanguage = this.randomBoolean();
-        this.settings.rainbowHearts = this.randomBoolean();
-        this.settings.tunicColor = this.randomColorHex();
-        this.settings.heartColor = this.randomColorHex();
-        this.settings.splitBarColor = this.randomColorHex();
-        this.settings.follower = this.randomNumberString(9);
+        this.settings.keysanity = Utils.randomBoolean();
+        this.settings.elementsInPool = Utils.randomBoolean();
+        this.settings.disableGlitches = Utils.randomBoolean();
+        this.settings.obscureSpots = Utils.randomBoolean();
+        this.settings.rupeesInPool = Utils.randomBoolean();
+        this.settings.nonSwordWeapons = Utils.randomBoolean();
+        this.settings.trapsInItemPool = Utils.randomBoolean();
+        this.settings.oneHitTimer = Utils.randomBoolean();
+        this.settings.kinstoneFusion = Utils.randomNumberString(3);
+        this.settings.kinstoneFusionSkips = Utils.randomNumberString(3);
+        this.settings.openDHC = Utils.randomNumberString(4);
+        this.settings.swordPed = Utils.randomNumberString(6);
+        this.settings.elementPed = Utils.randomNumberString(5);
+        this.settings.randomMusic = Utils.randomBoolean();
+        this.settings.randomLanguage = Utils.randomBoolean();
+        this.settings.rainbowHearts = Utils.randomBoolean();
+        this.settings.tunicColor = Utils.randomColorHex();
+        this.settings.heartColor = Utils.randomColorHex();
+        this.settings.splitBarColor = Utils.randomColorHex();
+        this.settings.follower = Utils.randomNumberString(9);
         this.settings.fuzziness = (Math.floor(Math.random() * 16) - 1).toString(); // rolls 0-15 then subtracts 1, making the range -1 to 14
 
         this.updateColorPicker('tunicColor', { hex: this.settings.tunicColor, });
