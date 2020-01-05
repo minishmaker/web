@@ -565,7 +565,7 @@
               title="base 64 string" />
             <button
               class="random-button"
-              @click.prevent="setMainSettingsString">
+              @click.prevent="setMainSettingsString()">
               Set
             </button>
           </div>
@@ -583,12 +583,12 @@
               title="base 64 string" />
             <button
               class="random-button"
-              @click.prevent="setGimmickSettingsString">
+              @click.prevent="setGimmickSettingsString()">
               Set
             </button>
           </div>
 
-          <div class="options-group">
+          <!-- <div class="options-group">
             <label for="opLogicFile">
               {{ $t('rando.additional.customLogic') }}
             </label>
@@ -608,7 +608,7 @@
               ref="opPatchFile"
               name="opPatchFile"
               type="file" />
-          </div>
+          </div> -->
         </section>
 
         <section class="rom-randomize">
@@ -751,10 +751,8 @@
       },
       generateSettingsStrings() {
         const parsedSettings = Utils.parseSettings(this.settings);
-        const encodedMainSettings = Utils.generateMainSettingsString(parsedSettings);
-        const encodedGimmickSettings = Utils.generateGimmickSettingsString(parsedSettings);
-        console.log(encodedMainSettings);
-        console.log(encodedGimmickSettings);
+        const encodedMainSettings = Utils.encodeMainSettingsString(parsedSettings);
+        const encodedGimmickSettings = Utils.encodeGimmickSettingsString(parsedSettings);
         this.settings.mainSettingsString = encodedMainSettings;
         this.settings.gimmickSettingsString = encodedGimmickSettings;
       },
@@ -775,14 +773,22 @@
         this.settings = Object.assign({}, defaultSettings);
         this.raceMode = false;
         this.updateColorPicker('tunicColor', { hex: defaultSettings.tunicColor, });
-        this.updateColorPicker('splitBarColor', { hex: defaultSettings.splitBarColor, });
         this.updateColorPicker('heartColor', { hex: defaultSettings.heartColor, });
+        this.updateColorPicker('splitBarColor', { hex: defaultSettings.splitBarColor, });
       },
-      setMainSettingsString(e) {
-        this.settings.mainSettingsString = e.target.value;
+      setMainSettingsString() {
+        this.settings.mainSettingsString = this.$refs.opMainSettings.value;
+        const decoded = Utils.decodeMainSettingsString(this.$refs.opMainSettings.value);
+        this.$set(this, 'settings', Object.assign(this.settings, decoded));
       },
       setGimmickSettingsString(e) {
-        this.settings.mainSettingsString = e.target.value;
+        this.settings.gimmickSettingsString = this.$refs.opGimmickSettings.value;
+        const decoded = Utils.decodeGimmickSettingsString(this.$refs.opGimmickSettings.value);
+        this.$set(this, 'settings', Object.assign(this.settings, decoded));
+
+        this.updateColorPicker('tunicColor', { hex: this.settings.tunicColor, });
+        this.updateColorPicker('heartColor', { hex: this.settings.heartColor, });
+        this.updateColorPicker('splitBarColor', { hex: this.settings.splitBarColor, });
       },
       randomizeColorPicker(name) {
         this.updateColorPicker(name, { hex: Utils.randomColorHex(), });
@@ -812,8 +818,8 @@
         this.settings.fuzziness = (Math.floor(Math.random() * 16)).toString();
 
         this.updateColorPicker('tunicColor', { hex: this.settings.tunicColor, });
-        this.updateColorPicker('splitBarColor', { hex: this.settings.splitBarColor, });
         this.updateColorPicker('heartColor', { hex: this.settings.heartColor, });
+        this.updateColorPicker('splitBarColor', { hex: this.settings.splitBarColor, });
       },
     },
   };

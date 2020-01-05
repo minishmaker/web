@@ -39,7 +39,7 @@ module.exports = {
       kinstoneFusions: {
         name: 'Kinstone Fusions',
         option1: 'No normal fusions',
-        option1Tooltip: 'All of the non-gold kinstone fusions in the game are disabled. don’t worry you don’t need to do any of them to beat the game.',
+        option1Tooltip: 'All of the non-gold kinstone fusions in the game are disabled. Don’t worry, you don’t need to do any of them to beat the game.',
         option2: 'Open fusion mode',
         option2Tooltip: 'All the non-gold kinstone fusions have been auto-completed, and all the item locations behind those fusions are available to collect.',
         option3: 'Vanilla fusions',
