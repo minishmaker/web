@@ -2,9 +2,6 @@ import {
   cloneDeep,
 } from 'lodash';
 
-const mainBase64Length = 49;
-const gimmickBase64Length = 90;
-
 // Parses each double hex value into base 16 and rounds resulting number to nearest 8 multiple
 export function roundToNearestEight(num) {
   const remain = num % 8;
@@ -37,10 +34,6 @@ function convertRGBToHex(r, g, b) {
 
 export function randomSeed() {
   return Math.floor(Math.random() * 2147483647).toString();
-}
-
-export function randomizeSeed() {
-  this.settings.seed = randomSeed();
 }
 
 export function randomBoolean() {
@@ -136,7 +129,7 @@ function decodeHelper(settings) {
 
 export function decodeMainSettingsString(settings) {
   const decoded = {};
-  const decodedSettings = decodeHelper(settings, mainBase64Length);
+  const decodedSettings = decodeHelper(settings);
 
   decoded.keysanity = decodedSettings[0] === '1';
   decoded.elementsInPool = decodedSettings[1] === '1';
@@ -182,7 +175,7 @@ export function encodeGimmickSettingsString(parsedSettings) {
 
 export function decodeGimmickSettingsString(settings) {
   const decoded = {};
-  const decodedSettings = decodeHelper(settings, gimmickBase64Length);
+  const decodedSettings = decodeHelper(settings);
 
   const decodedTunicColorR = parseInt(decodedSettings.substring(2, 10), 2);
   const decodedTunicColorG = parseInt(decodedSettings.substring(10, 18), 2);

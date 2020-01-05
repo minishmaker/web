@@ -793,6 +793,9 @@
       randomizeColorPicker(name) {
         this.updateColorPicker(name, { hex: Utils.randomColorHex(), });
       },
+      randomizeSeed() {
+        this.settings.seed = Utils.randomSeed();
+      },
       setRandomSettings() {
         this.raceMode = false;
         this.settings.keysanity = Utils.randomBoolean();
