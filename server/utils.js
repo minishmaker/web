@@ -77,6 +77,7 @@ function binaryStringToUintArray(binary) {
   const converted = new Uint8Array(Math.ceil(binary.length / 8));
   let i = 0;
   for (let pointer = 0; pointer - 8 < binary.length; pointer += 8) {
+    // convert each grouping of 8 to a decimal (8-bit)
     const temp = binary.substring(pointer, pointer + 8);
     converted[i] = parseInt(temp, 2);
     i++;
@@ -121,7 +122,6 @@ export function encodeMainSettingsString(parsedSettings) {
 }
 
 function decodeHelper(settings) {
-  // decode to decimal number, parse to number, turn into binary format
   let decode = atob(settings);
   decode = uintArrayToBinaryString(decode);
   return decode;
