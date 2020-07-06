@@ -4,7 +4,15 @@
       src="~/assets/Ezlo_Cap_Form.png"
       alt="Picture of Ezlo from Minish Cap" />
     <section class="sub-container">
-      Level editor stuff
+      <h3 class="about">
+        About
+      </h3>
+      <h3 class="features">
+        Features
+      </h3>
+      <h3 class="download">
+        Download
+      </h3>
     </section>
   </main>
 </template>
