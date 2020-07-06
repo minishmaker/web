@@ -52,6 +52,7 @@ module.exports = {
     'nuxt-i18n',
     '@nuxtjs/markdownit',
     '@nuxtjs/dotenv',
+    'vue-scrollto/nuxt',
     [
       '@nuxtjs/localforage', {
         name        : 'MinishMaker',

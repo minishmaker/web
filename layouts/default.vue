@@ -13,7 +13,7 @@
           MinishMaker
         </nuxt-link>
         <nuxt-link
-          :to="localePath('levelEditor')"
+          :to="localePath('level_editor')"
           class="level-nav">
           {{ $t('nav.links.levelEditor') }}
         </nuxt-link>
@@ -23,7 +23,7 @@
           {{ $t('nav.links.rando') }}
         </nuxt-link>
         <nuxt-link
-          :to="localePath('saveEditor')"
+          :to="localePath('save_editor')"
           class="save-nav">
           {{ $t('nav.links.saveEditor') }}
         </nuxt-link>
@@ -55,6 +55,29 @@
         </a>
       </div>
     </nav>
+
+    <div
+      v-show="$route.fullPath != '/'"
+      :class="{
+        'sub-nav': true,
+        'nav-links': true,
+        'level-sub-nav': $route.fullPath == '/level_editor',
+        'rando-sub-nav': $route.fullPath == '/rando',
+        'save-sub-nav': $route.fullPath == '/save_editor',
+      }">
+      <div class="link-container">
+        <a v-scroll-to="'.about'">
+          About
+        </a>
+        <a v-scroll-to="'.features'">
+          Features
+        </a>
+        <a v-scroll-to="'.download'">
+          Download
+        </a>
+      </div>
+    </div>
+
     <main class="main-container">
       <transition name="fade">
         <nuxt keep-alive />
@@ -66,6 +89,7 @@
         English
       </nuxt-link>
     </div>
+
     <footer class="footer">
       Site maintained by UselessHobo --&nbsp;
       <span class="pull-right">
@@ -156,6 +180,10 @@
     opacity: 0;
   }
 
+  .main-container {
+    margin-top: 12px;
+  }
+
   .nav-links {
     display: flex;
     flex: 0 1 0;
@@ -164,8 +192,24 @@
     font-size: 18px;
     background: $nav-background-color;
     padding: 12px 8px;
-    margin-bottom: 12px;
     border-bottom: 1px solid $nav-border-color;
+
+    &.sub-nav {
+      padding-left: 10%;
+      border-top: 1px solid $nav-border-color;
+
+      &.rando-sub-nav {
+        a:after {
+          border-bottom-color: $kinstone-red-color;
+        }
+      }
+
+      &.save-sub-nav {
+        a:after {
+          border-bottom-color: $kinstone-blue-color;
+        }
+      }
+    }
 
     .link-container {
       flex: auto;
@@ -185,6 +229,7 @@
     a {
       padding: 4px;
       margin: 0px 4px;
+      cursor: pointer;
 
       // Home link. Get it? LINK? :D
       &.home-link {
@@ -200,7 +245,7 @@
       &:not(.home-link):after {
         content: '';
         display: block;
-        border-bottom: 3px solid #31d018;
+        border-bottom: 3px solid $kinstone-green-color;
         width: 0;
         position: absolute;
         left: 0;
@@ -209,20 +254,35 @@
 
       }
 
-      &.rando-nav:after {
-        border-bottom-color: #d04020;
+      &.level-nav {
+        &:hover {
+          color: $kinstone-green-color;
+        }
       }
-      &.save-nav:after {
-        border-bottom-color: #28a0f0;
+      &.rando-nav {
+        &:hover {
+          color: $kinstone-red-color;
+        }
+        &:after {
+          border-bottom-color: $kinstone-red-color;
+        }
+      }
+      &.save-nav {
+        &:hover {
+          color: $kinstone-blue-color;
+        }
+        &:after {
+          border-bottom-color: $kinstone-blue-color;
+        }
       }
       &.discord-social:after {
-        border-bottom-color: #7289DA;
+        border-bottom-color: #7289DA; // main discord color
       }
       &.github-social:after {
-        border-bottom-color: #171516;
+        border-bottom-color: #171516; // main github color
       }
       &.twitter-social:after {
-        border-bottom-color: #1da1f2;
+        border-bottom-color: #1da1f2; // main twitter color
       }
 
       &:not(.home-link):hover:after {
