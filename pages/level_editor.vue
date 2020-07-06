@@ -1,23 +1,27 @@
 <template>
   <main class="container">
     <img
+      class="page-img"
       src="~/assets/Ezlo_Cap_Form.png"
       alt="Picture of Ezlo from Minish Cap" />
     <section class="sub-container">
-      <h3 class="about">
+      <h2 class="about">
         About
-      </h3>
-      <h3 class="features">
+      </h2>
+      <h2 class="features">
         Features
-      </h3>
-      <h3 class="download">
+      </h2>
+      <h2 class="download">
         Download
-      </h3>
+      </h2>
+      <Github url="https://api.github.com/repos/minishmaker/minishmaker/releases" />
     </section>
   </main>
 </template>
 
 <script>
+  import Github from '@/components/github.vue';
+
   export default {
     head() {
       return {
@@ -30,6 +34,10 @@
           },
         ],
       };
+    },
+
+    components: {
+      Github,
     },
   };
 </script>
