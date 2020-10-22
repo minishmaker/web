@@ -94,6 +94,7 @@
 
     a {
       font-size: 1.1rem;
+      font-weight: 600;
       color: #0366d6;
 
       &:hover {

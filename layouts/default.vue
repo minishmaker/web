@@ -83,18 +83,47 @@
         <nuxt keep-alive />
       </transition>
     </main>
-    <div class="locales">
-      <nuxt-link :to="switchLocalePath('en')">
-        <span class="flag-icon flag-icon-us" />
-        English
-      </nuxt-link>
-    </div>
 
     <footer class="footer">
-      Site maintained by UselessHobo --&nbsp;
-      <span class="pull-right">
-        Images sourced from https://zelda.gamepedia.com
-      </span>
+      <div class="footer-container">
+        <div class="locales">
+          <nuxt-link :to="switchLocalePath('en')">
+            <span class="flag-icon flag-icon-us" />
+            English
+          </nuxt-link>
+
+          <div class="social-icons">
+            <a
+              href="https://discord.gg/ndFuWbV"
+              target="_blank"
+              class="discord-social">
+              <img
+                src="~/assets/Discord-Logo-Color.png"
+                alt="Discord logo" />
+            </a>
+            <a
+              href="https://github.com/minishmaker"
+              target="_blank"
+              class="github-social">
+              <img
+                src="~/assets/Github-Mark-64px.png"
+                alt="Github logo" />
+            </a>
+            <a
+              href="https://twitter.com/minishmaker"
+              target="_blank"
+              class="twitter-social">
+              <img
+                src="~/assets/Twitter_Social_Icon.png"
+                alt="Twitter logo" />
+            </a>
+          </div>
+        </div>
+        <div class="site-map">
+          Site maintained by UselessHobo --&nbsp;
+          Images sourced from https://zelda.gamepedia.com
+        </div>
+      </div>
     </footer>
   </div>
 </template>
@@ -195,7 +224,8 @@
     border-bottom: 1px solid $nav-border-color;
 
     &.sub-nav {
-      padding-left: 10%;
+      font-size: 16px;
+      padding-left: 8%;
       border-top: 1px solid $nav-border-color;
 
       &.rando-sub-nav {
@@ -213,17 +243,6 @@
 
     .link-container {
       flex: auto;
-    }
-
-    // .locales {
-    //   font-size: 16px;
-    // }
-
-    .social-icons {
-      img {
-        width: 32px;
-        height: 32px;
-      }
     }
 
     a {
@@ -251,7 +270,6 @@
         left: 0;
         -webkit-transition: 0.4s ease;
         transition: 0.4s ease;
-
       }
 
       &.level-nav {
@@ -303,15 +321,44 @@
     }
   }
 
+  .social-icons {
+    img {
+      width: 32px;
+      height: 32px;
+    }
+  }
+
   .footer {
     display: flex;
     flex: 0 1 0;
-    justify-content: center;
-    align-items: center;
-    font-size: 14px;
+    font-size: 16px;
     height: 30px;
     background-color: $footer-background-color;
     border-top: 1px solid $footer-border-color;
+
+    .footer-container {
+      height: 160px;
+      display: flex;
+      flex: 100%;
+      flex-flow: row wrap;
+      padding: 16px;
+
+      .locales {
+        flex: 40%;
+
+        .social-icons {
+          padding-top: 20px;
+
+          & > a {
+            padding-right: 16px;
+          }
+        }
+      }
+    }
+
+    .site-map {
+      flex: 60%;
+    }
   }
 
   .pull-right {
