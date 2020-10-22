@@ -70,6 +70,11 @@ module.exports = {
   i18n: {
     locales: i18n.locales,
     defaultLocale: 'en',
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'i18n_redirected',
+      onlyOnRoot: true,
+    },
     vueI18n: {
       fallbackLocale: 'en',
       messages: i18n.messages,
