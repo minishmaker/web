@@ -87,10 +87,17 @@
     <footer class="footer">
       <div class="footer-container">
         <div class="locales">
-          <nuxt-link :to="switchLocalePath('en')">
-            <span class="flag-icon flag-icon-us" />
-            English
-          </nuxt-link>
+          <span :class="`flag-icon flag-icon-${selectedLanguage.flagCode}`" />
+          <select
+            v-model="selectedLanguage"
+            @update="changeLanguage(selectedLanguage)">
+            <option
+              v-for="language in languages"
+              :key="language.key"
+              :value="language">
+              {{ language.label }}
+            </option>
+          </select>
 
           <div class="social-icons">
             <a
@@ -143,6 +150,27 @@
           },
         ],
       };
+    },
+
+    data() {
+      const languages = [
+        {
+          key: 'en',
+          label: 'English',
+          flagCode: 'us',
+        },
+      ];
+
+      return {
+        languages,
+        selectedLanguage: languages[0],
+      };
+    },
+
+    methods: {
+      changeLanguage(selectedLanguage) {
+        this.switchLocalePath(selectedLanguage.key);
+      },
     },
   };
 </script>
