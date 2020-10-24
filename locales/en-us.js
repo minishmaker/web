@@ -5,6 +5,11 @@ module.exports = {
       rando: 'Randomizer',
       saveEditor: 'Save Editor',
     },
+    subnav: {
+      about: 'About',
+      features: 'Features',
+      download: 'Download',
+    },
   },
   index: {
     greeting: 'Minish Cap Rando! Woot!',
