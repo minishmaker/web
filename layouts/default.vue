@@ -67,13 +67,13 @@
       }">
       <div class="link-container">
         <a v-scroll-to="'.about'">
-          About
+          {{ $t('nav.subnav.about') }}
         </a>
         <a v-scroll-to="'.features'">
-          Features
+          {{ $t('nav.subnav.features') }}
         </a>
         <a v-scroll-to="'.download'">
-          Download
+          {{ $t('nav.subnav.download') }}
         </a>
       </div>
     </div>
@@ -87,17 +87,19 @@
     <footer class="footer">
       <div class="footer-container">
         <div class="locales">
-          <span :class="`flag-icon flag-icon-${selectedLanguage.flagCode}`" />
-          <select
-            v-model="selectedLanguage"
-            @update="changeLanguage(selectedLanguage)">
-            <option
-              v-for="language in languages"
-              :key="language.key"
-              :value="language">
-              {{ language.label }}
-            </option>
-          </select>
+          <div class="language-select">
+            <span :class="`flag-icon flag-icon-${selectedLanguage.flagCode}`" />
+            <select
+              v-model="selectedLanguage"
+              @update="changeLanguage(selectedLanguage)">
+              <option
+                v-for="language in languages"
+                :key="language.key"
+                :value="language">
+                {{ language.label }}
+              </option>
+            </select>
+          </div>
 
           <div class="social-icons">
             <a
@@ -127,7 +129,7 @@
           </div>
         </div>
         <div class="site-map">
-          Site maintained by UselessHobo --&nbsp;
+          Site maintained by Hubu --&nbsp;
           Images sourced from https://zelda.gamepedia.com
         </div>
       </div>
@@ -137,6 +139,16 @@
 
 <script>
   import 'flag-icon-css/css/flag-icon.min.css';
+  import localeInfo from '@/locales';
+
+  const languages = [];
+  for (let i = 0; i < localeInfo.locales.length; i++) {
+    languages.push({
+      key: localeInfo.locales[i],
+      label: localeInfo.localeLabels[i],
+      flagCode: localeInfo.localFlagCodes[i],
+    });
+  }
 
   export default {
     head() {
@@ -153,14 +165,6 @@
     },
 
     data() {
-      const languages = [
-        {
-          key: 'en',
-          label: 'English',
-          flagCode: 'us',
-        },
-      ];
-
       return {
         languages,
         selectedLanguage: languages[0],
@@ -373,6 +377,21 @@
 
       .locales {
         flex: 40%;
+
+        .language-select {
+          display: flex;
+          flex: 100%;
+          justify-content: flex-start;
+
+          .flag-icon {
+            font-size: 20px;
+            margin-right: 8px;
+          }
+
+          select {
+            font-size: 16px;
+          }
+        }
 
         .social-icons {
           padding-top: 20px;
