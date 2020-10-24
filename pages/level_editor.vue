@@ -6,13 +6,13 @@
       alt="Picture of Ezlo from Minish Cap" />
     <section class="sub-container">
       <h2 class="about">
-        About
+        {{ $t('nav.subnav.about') }}
       </h2>
       <h2 class="features">
-        Features
+        {{ $t('nav.subnav.features') }}
       </h2>
       <h2 class="download">
-        Download
+        {{ $t('nav.subnav.download') }}
       </h2>
       <Github url="https://api.github.com/repos/minishmaker/minishmaker/releases" />
     </section>
