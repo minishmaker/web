@@ -25,8 +25,8 @@
     <section class="release-notes">
       <h3>Release Notes:</h3>
       <div
-        class="release-body"
-        v-html="$md.render(latestRelease.body)" />
+        v-html="$md.render(latestRelease.body)"
+        class="release-body" />
     </section>
   </div>
 </template>

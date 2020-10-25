@@ -3,8 +3,6 @@ const i18n = require('./locales');
 require('dotenv').config();
 
 module.exports = {
-  mode: 'universal',
-
   env: {
     GITHUB_TOKEN: process.env.GITHUB_TOKEN,
   },

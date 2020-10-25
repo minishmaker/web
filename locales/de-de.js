@@ -25,7 +25,6 @@ module.exports = {
       keysanity: 'Keysanity',
       keysanityTooltip: 'Mit Keysanity werden Dungeon Items (Kleine und große Schlüssel, Karten und Kompasse) in den globalen Item-pool gemischt, also könnte der Schlüssel für den Dungeon, in dem du bist, überall sein!',
       elementsInPool: 'Elemente in den Item-Pool',
-      elementsInPoolTooltip: 'Instead of the elements being rewards for completing certain dungeons, the elements can be found in any normal item location.',
       elementsInPoolTooltip: 'Anstatt die Elemente als Belohnung nach bestimmten Dungeons zu erhalten, können sie überall gefunden werden.',
       disableGlitches: 'Verhindere Glitches',
       obscureSpots: 'Obskure Orte',
@@ -53,7 +52,7 @@ module.exports = {
         option2: 'Sofort Überspringen',
         option2Tooltip: 'Die Zwischensequenzen für die Vereinigungen nicht-goldener Glücksfragmente werden übersprungen.',
         option3: 'Nicht Überspringen',
-        option2Tooltip: 'Die Zwischensequenzen für die Vereinigungen nicht-goldener Glücksfragmente werden nicht übersprungen.',
+        option3Tooltip: 'Die Zwischensequenzen für die Vereinigungen nicht-goldener Glücksfragmente werden nicht übersprungen.',
       },
       openDHC: {
         name: 'Dunkles Schloss Hyrule/Podest',
@@ -117,7 +116,6 @@ module.exports = {
         option9: 'Anju',
       },
       fuzziness: 'Unschärfe',
-      fuzzinessWarning: 'Adds the screen transition effect to the whole screen all the time, making everything blurry. This can be seizure inducing! Please do not use this option if you are prone to seizures!',
       fuzzinessWarning: 'Macht das gesamte Spiel unscharf. Die kann epileptische Anfälle auslösen! Bitte nutze diese Option nicht, falls du hohes Anfallsrisiko hast!',
     },
     additional: {
