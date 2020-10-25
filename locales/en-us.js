@@ -48,7 +48,7 @@ module.exports = {
       skipFusions: {
         name: 'Skip Fusions',
         option1: 'Allow fusion skips',
-        option1Tooltip: ' The cutscenes for each  of the non-gold kinstone fusions in the game can be skipped by pressing a button during the cutscene.',
+        option1Tooltip: 'The cutscenes for each of the non-gold kinstone fusions in the game can be skipped by pressing a button during the cutscene.',
         option2: 'Instant fusion skips',
         option2Tooltip: 'The cutscenes for all the non-gold kinstone fusions will instantly skip once you trigger the fusion.',
         option3: 'No fusion skips',
@@ -57,7 +57,7 @@ module.exports = {
       openDHC: {
         name: 'DHC/Pedestal',
         option1: 'Pedestal open/Regular DHC',
-        option1Tooltip: 'Going to the pedestal in the basement of hyrule with the required items opens DHC, then you complete DHC and beat Vaati like normal.',
+        option1Tooltip: 'Going to the pedestal in the basement of hyrule castle with the required items opens DHC, then you complete DHC and beat Vaati like normal.',
         option2: 'Pedestal finish/No DHC',
         option2Tooltip: 'Going to the pedestal in the basement of hyrule castle with the required items finishes the game, no need to complete DHC or beat Vaati.',
         option3: 'Open DHC',
