@@ -57,7 +57,7 @@
     </nav>
 
     <div
-      v-show="$route.fullPath != '/'"
+      v-show="$route.fullPath != '/' && !isLocaleRoot"
       :class="{
         'sub-nav': true,
         'nav-links': true,
@@ -88,17 +88,14 @@
       <div class="footer-container">
         <div class="locales">
           <div class="language-select">
-            <span :class="`flag-icon flag-icon-${selectedLanguage.flagCode}`" />
-            <select
-              v-model="selectedLanguage"
-              @update="changeLanguage(selectedLanguage)">
-              <option
-                v-for="language in languages"
-                :key="language.key"
-                :value="language">
-                {{ language.label }}
-              </option>
-            </select>
+            <nuxt-link :to="switchLocalePath('en')">
+              <span class="flag-icon flag-icon-us" />
+              English
+            </nuxt-link>
+            <nuxt-link :to="switchLocalePath('de')">
+              <span class="flag-icon flag-icon-de" />
+              Deutsche
+            </nuxt-link>
           </div>
 
           <div class="social-icons">
@@ -138,6 +135,7 @@
 </template>
 
 <script>
+  /* eslint-disable comma-dangle */
   import 'flag-icon-css/css/flag-icon.min.css';
   import localeInfo from '@/locales';
 
@@ -171,11 +169,18 @@
       };
     },
 
-    methods: {
-      changeLanguage(selectedLanguage) {
-        this.switchLocalePath(selectedLanguage.key);
-      },
+    computed: {
+      isLocaleRoot() {
+        return !!this.$route.fullPath.match(/\/(?:de|en)$/);
+      }
     },
+
+    // methods: {
+    //   changeLanguage(selectedLanguage) {
+    //     this.$i18n.locale = selectedLanguage.key;
+    //     this.$router.replace(`${selectedLanguage.key !== 'en' ? selectedLanguage.key + '/' : ''}${this.$route.fullPath}`)
+    //   },
+    // },
   };
 </script>
 
@@ -381,15 +386,19 @@
         .language-select {
           display: flex;
           flex: 100%;
-          justify-content: flex-start;
+          flex-flow: row wrap;
+
+          a {
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+            margin-right: 12px;
+            font-weight: 600;
+          }
 
           .flag-icon {
             font-size: 20px;
-            margin-right: 8px;
-          }
-
-          select {
-            font-size: 16px;
+            margin-right: 4px;
           }
         }
 

@@ -1,3 +1,4 @@
+/* eslint-disable */
 module.exports = {
   messages: {
     en: require('./en-us.js'),

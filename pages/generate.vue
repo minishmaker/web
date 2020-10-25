@@ -8,27 +8,27 @@
       <section class="settings-buttons-container">
         <div>
           <button
-            class="settings-button"
-            @click="setRaceSettings()">
+            @click="setRaceSettings()"
+            class="settings-button">
             {{ $t('rando.top.weekly') }}
           </button>
           <button
-            class="settings-button"
-            @click="setRandomSettings()">
+            @click="setRandomSettings()"
+            class="settings-button">
             {{ $t('rando.top.random') }}
           </button>
         </div>
         <button
-          class="settings-button reset"
-          @click="setDefaultSettings()">
+          @click="setDefaultSettings()"
+          class="settings-button reset">
           {{ $t('rando.top.reset') }}
         </button>
       </section>
 
       <form
         ref="optionsForm"
-        class="options-form"
-        @submit.prevent="generateSettingsStrings">
+        @submit.prevent="generateSettingsStrings"
+        class="options-form">
         <!-- Main options -->
         <section class="options-container">
           <h3 class="options-title">
@@ -405,8 +405,8 @@
               ref="tunicColorPreview"
               class="color-preview" />
             <button
-              class="random-button"
-              @click.prevent="randomizeColorPicker('tunicColor')">
+              @click.prevent="randomizeColorPicker('tunicColor')"
+              class="random-button">
               🎲
             </button>
           </div>
@@ -427,8 +427,8 @@
               ref="splitBarColorPreview"
               class="color-preview" />
             <button
-              class="random-button"
-              @click.prevent="randomizeColorPicker('splitBarColor')">
+              @click.prevent="randomizeColorPicker('splitBarColor')"
+              class="random-button">
               🎲
             </button>
           </div>
@@ -450,8 +450,8 @@
               ref="heartColorPreview"
               class="color-preview" />
             <button
-              class="random-button"
-              @click.prevent="randomizeColorPicker('heartColor')">
+              @click.prevent="randomizeColorPicker('heartColor')"
+              class="random-button">
               🎲
             </button>
           </div>
@@ -546,8 +546,8 @@
               title="Numbers only"
               pattern="[0-9]+" />
             <button
-              class="random-button"
-              @click.prevent="randomizeSeed()">
+              @click.prevent="randomizeSeed()"
+              class="random-button">
               🎲
             </button>
           </div>
@@ -564,8 +564,8 @@
               name="opMainSettings"
               title="base 64 string" />
             <button
-              class="random-button"
-              @click.prevent="setMainSettingsString()">
+              @click.prevent="setMainSettingsString()"
+              class="random-button">
               Set
             </button>
           </div>
@@ -582,8 +582,8 @@
               name="opGimmickSettings"
               title="base 64 string" />
             <button
-              class="random-button"
-              @click.prevent="setGimmickSettingsString()">
+              @click.prevent="setGimmickSettingsString()"
+              class="random-button">
               Set
             </button>
           </div>
@@ -624,9 +624,9 @@
           </div>
 
           <input
+            :value="$t('rando.randomize')"
             class="rando-submit"
-            type="submit"
-            :value="$t('rando.randomize')" />
+            type="submit" />
         </section>
       </form>
     </section>
@@ -634,6 +634,7 @@
 </template>
 
 <script>
+  /* eslint-disable comma-dangle */
   import {
     Chrome as ChromeColorPicker,
   } from 'vue-color';
