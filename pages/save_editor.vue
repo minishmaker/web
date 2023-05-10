@@ -2,8 +2,8 @@
   <main class="container">
     <img
       class="page-img"
-      src="~/assets/Princess_Zelda.png"
-      alt="Picture of Zelda from Minish Cap" />
+      src="~/assets/Forest_Minish.png"
+      alt="Picture of a Forest Minish from Minish Cap" />
     <section class="sub-container">
       <h2 class="about">
         {{ $t('nav.subnav.about') }}
@@ -14,7 +14,7 @@
       <h2 class="download">
         {{ $t('nav.subnav.download') }}
       </h2>
-      <Github url="https://api.github.com/repos/minishmaker/randomizer/releases" />
+      <Github url="https://api.github.com/repos/minishmaker/save-editor/releases" />
     </section>
   </main>
 </template>
@@ -25,12 +25,12 @@
   export default {
     head() {
       return {
-        title: 'Generate Random Playthrough',
+        title: 'Save Editor',
         meta: [
           {
             hid: 'description',
             name: 'description',
-            content: 'Randomize your playthrough of Minish Cap',
+            content: 'Modify your save files to practice specific scenarios!',
           },
         ],
       };
@@ -43,8 +43,6 @@
 </script>
 
 <style lang="scss" scoped>
-  @import '~@/assets/global-styles';
-
   .page-img {
     max-width: 224px;
   }

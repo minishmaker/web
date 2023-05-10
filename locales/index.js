@@ -1,6 +1,9 @@
+/* eslint-disable */
 module.exports = {
   messages: {
     en: require('./en-us.js'),
   },
-  locales: ['en'],
+  locales: ['en', 'de'],
+  localeLabels: ['English', 'Deustche'],
+  localFlagCodes: ['en_us', 'de_de'],
 };

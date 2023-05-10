@@ -1,0 +1,263 @@
+@import '~@/assets/global-styles';
+
+.page-img {
+  max-width: 230px;
+}
+
+.settings-buttons-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 8px 16px;
+
+  div {
+    display: inline-block;
+  }
+}
+
+button {
+  width: 140px;
+  height: 32px;
+  padding: 5px;
+  font-size: 14px;
+  position: relative;
+  color: $link-main-color;
+  background: $nav-background-color;
+  border: 2px solid $nav-border-color;
+  border-radius: 2px;
+
+  &:hover {
+    cursor: pointer;
+    border-color: $button--hover;
+  }
+
+  &.random-button {
+    width: 32px;
+    height: 32px;
+    margin-left: 6px;
+  }
+
+  &.settings-button {
+    width: 150px;
+
+    &.reset {
+      width: 90px;
+      color: $button--reset;
+    }
+  }
+}
+
+.options-form {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+
+  .options-container {
+    display: flex;
+    flex: 100%;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    position: relative;
+    margin: 16px;
+    padding: 12px;
+    border: 1px solid $nav-border-color;
+
+    .color-preview {
+      display: inline-block;
+      margin-left: 6px;
+      width: 32px;
+      height: 32px;
+      border: 2px solid $nav-border-color;
+      border-radius: 2px;
+
+      &::before {
+        content: ' ';
+      }
+    }
+
+    .options-title {
+      position: absolute;
+      background: $site-background-color;
+      padding: 2px 10px;
+      top: calc(-1rem + 1px);
+    }
+
+    .options-group {
+      display: flex;
+      align-items: center;
+      padding: 4px;
+      padding-right: 12px;
+
+      &.wide {
+        label {
+          flex-grow: 0;
+        }
+
+        input {
+          flex-grow: 1;
+        }
+      }
+
+      &.disabled {
+        & > * {
+          color: $nav-border-color;
+        }
+
+        label, input[type="range"], span {
+          &:hover {
+            cursor: not-allowed;
+          }
+        }
+      }
+
+      input {
+        &[type="checkbox"] {
+          -webkit-appearance:none;
+          border: 2px solid $nav-border-color;
+          border-radius: 2px;
+          width: 16px;
+          height: 16px;
+          margin-right: 4px;
+
+          &:disabled {
+            border-color: $nav-background-color;
+
+            & + label {
+              color: $nav-border-color;
+
+              &:hover {
+                cursor: not-allowed;
+              }
+            }
+
+            &:hover {
+              border-color: $nav-background-color;
+              cursor: not-allowed;
+            }
+          }
+
+          &:hover {
+            cursor: pointer;
+            border-color: $button--hover;
+          }
+
+          &:checked {
+            background: $link-main-color;
+          }
+
+          & + label {
+            flex-grow: unset;
+
+            &:hover {
+              cursor: pointer;
+            }
+          }
+        }
+
+        &[type="file"] {
+          width: 185px;
+        }
+
+        &[type="text"] {
+          font-size: 14px;
+          width: 146px;
+          height: 32px;
+        }
+      }
+
+      select {
+        width: 185px;
+        padding: 2px;
+
+        &:disabled {
+          &:hover {
+            cursor: not-allowed;
+          }
+        }
+      }
+
+      label {
+        display: flex;
+        justify-content: space-between;
+        text-align:left;
+        flex-grow: 1;
+        padding-right: 4px;
+      }
+    }
+
+    .vc-chrome {
+      position: absolute;
+      z-index: 10;
+      left: 135px;
+      top: -1px;
+    }
+  }
+
+  .rom-randomize {
+    display: flex;
+    flex: 100%;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+
+    input[type="submit"] {
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    input[type="file"] {
+      width: 200px;
+      font-size: 14px;
+    }
+  }
+
+  .rando-submit {
+    width: 225px;
+    height: 50px;
+    font-size: 22px;
+    color: $link-main-color;
+    background: $nav-background-color;
+    border: 2px solid $nav-border-color;
+    border-radius: 8px;
+
+    transition: color 0.75s ease-in-out;
+    transition: font-size 0.75s ease-in-out;
+
+    &:hover {
+      color: $link-main-color--hover;
+      font-size: 24px;
+    }
+  }
+}
+
+@media only screen and (max-width: 1599px) {
+  .options-group {
+    flex: 50%;
+    max-width: 50%;
+
+    &.wide {
+      flex: 100%;
+      max-width:  100%;
+
+      label {
+        width: 151px;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 1600px) {
+  .options-group {
+    flex: 33%;
+    max-width: 33%;
+
+    &.wide {
+      flex: 100%;
+      max-width:  100%;
+
+      label {
+        width: 177px;
+      }
+    }
+  }
+}

@@ -9,7 +9,7 @@
       <a
         href="https://github.com/minishmaker"
         target="_blank">
-        found here
+        found here.
       </a>
       <div
         v-show="latestRelease.id"
@@ -91,6 +91,7 @@
 </script>
 
 <style lang="scss" scoped>
+  @import '~@/assets/global-styles';
   $latest-release-background-color: rgba(190, 190, 190, 0.3);
 
   .page-img {

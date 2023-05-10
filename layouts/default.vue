@@ -12,43 +12,141 @@
             alt="Picture of a green kinstone from Minish Cap" />
           MinishMaker
         </nuxt-link>
-        <nuxt-link :to="localePath('rando')">
+        <nuxt-link
+          :to="localePath('level_editor')"
+          class="level-nav">
+          {{ $t('nav.links.levelEditor') }}
+        </nuxt-link>
+        <nuxt-link
+          :to="localePath('rando')"
+          class="rando-nav">
           {{ $t('nav.links.rando') }}
         </nuxt-link>
-        <nuxt-link :to="localePath('github')">
-          {{ $t('nav.links.github') }}
-        </nuxt-link>
-        <nuxt-link :to="localePath('discord')">
-          {{ $t('nav.links.discord') }}
-        </nuxt-link>
-        <nuxt-link :to="localePath('about')">
-          {{ $t('nav.links.about') }}
-        </nuxt-link>
-        <nuxt-link :to="localePath('tracker')">
-          {{ $t('nav.links.tracker') }}
+        <nuxt-link
+          :to="localePath('save_editor')"
+          class="save-nav">
+          {{ $t('nav.links.saveEditor') }}
         </nuxt-link>
       </div>
-
-      <div class="locales">
-        <nuxt-link :to="switchLocalePath('en')">
-          <span class="flag-icon flag-icon-us" />
-          English
-        </nuxt-link>
+      <div class="social-icons">
+        <a
+          href="https://discord.gg/ndFuWbV"
+          target="_blank"
+          class="discord-social">
+          <img
+            src="~/assets/Discord-Logo-Color.png"
+            alt="Discord logo" />
+        </a>
+        <a
+          href="https://github.com/minishmaker"
+          target="_blank"
+          class="github-social">
+          <img
+            src="~/assets/Github-Mark-64px.png"
+            alt="Github logo" />
+        </a>
+        <a
+          href="https://twitter.com/minishmaker"
+          target="_blank"
+          class="twitter-social">
+          <img
+            src="~/assets/Twitter_Social_Icon.png"
+            alt="Twitter logo" />
+        </a>
       </div>
     </nav>
+
+    <div
+      v-show="$route.fullPath != '/' && !isLocaleRoot"
+      :class="{
+        'sub-nav': true,
+        'nav-links': true,
+        'level-sub-nav': $route.fullPath == '/level_editor',
+        'rando-sub-nav': $route.fullPath == '/rando',
+        'save-sub-nav': $route.fullPath == '/save_editor',
+      }">
+      <div class="link-container">
+        <a v-scroll-to="'.about'">
+          {{ $t('nav.subnav.about') }}
+        </a>
+        <a v-scroll-to="'.features'">
+          {{ $t('nav.subnav.features') }}
+        </a>
+        <a v-scroll-to="'.download'">
+          {{ $t('nav.subnav.download') }}
+        </a>
+      </div>
+    </div>
+
     <main class="main-container">
       <transition name="fade">
         <nuxt keep-alive />
       </transition>
     </main>
+
     <footer class="footer">
-      Site maintained by UselessHobo
+      <div class="footer-container">
+        <div class="locales">
+          <div class="language-select">
+            <nuxt-link :to="switchLocalePath('en')">
+              <span class="flag-icon flag-icon-us" />
+              English
+            </nuxt-link>
+            <nuxt-link :to="switchLocalePath('de')">
+              <span class="flag-icon flag-icon-de" />
+              Deutsche
+            </nuxt-link>
+          </div>
+
+          <div class="social-icons">
+            <a
+              href="https://discord.gg/ndFuWbV"
+              target="_blank"
+              class="discord-social">
+              <img
+                src="~/assets/Discord-Logo-Color.png"
+                alt="Discord logo" />
+            </a>
+            <a
+              href="https://github.com/minishmaker"
+              target="_blank"
+              class="github-social">
+              <img
+                src="~/assets/Github-Mark-64px.png"
+                alt="Github logo" />
+            </a>
+            <a
+              href="https://twitter.com/minishmaker"
+              target="_blank"
+              class="twitter-social">
+              <img
+                src="~/assets/Twitter_Social_Icon.png"
+                alt="Twitter logo" />
+            </a>
+          </div>
+        </div>
+        <div class="site-map">
+          Site maintained by Hubu --&nbsp;
+          Images sourced from https://zelda.gamepedia.com
+        </div>
+      </div>
     </footer>
   </div>
 </template>
 
 <script>
+  /* eslint-disable comma-dangle */
   import 'flag-icon-css/css/flag-icon.min.css';
+  import localeInfo from '@/locales';
+
+  const languages = [];
+  for (let i = 0; i < localeInfo.locales.length; i++) {
+    languages.push({
+      key: localeInfo.locales[i],
+      label: localeInfo.localeLabels[i],
+      flagCode: localeInfo.localFlagCodes[i],
+    });
+  }
 
   export default {
     head() {
@@ -63,6 +161,26 @@
         ],
       };
     },
+
+    data() {
+      return {
+        languages,
+        selectedLanguage: languages[0],
+      };
+    },
+
+    computed: {
+      isLocaleRoot() {
+        return !!this.$route.fullPath.match(/\/(?:de|en)$/);
+      }
+    },
+
+    // methods: {
+    //   changeLanguage(selectedLanguage) {
+    //     this.$i18n.locale = selectedLanguage.key;
+    //     this.$router.replace(`${selectedLanguage.key !== 'en' ? selectedLanguage.key + '/' : ''}${this.$route.fullPath}`)
+    //   },
+    // },
   };
 </script>
 
@@ -128,6 +246,10 @@
     opacity: 0;
   }
 
+  .main-container {
+    margin-top: 12px;
+  }
+
   .nav-links {
     display: flex;
     flex: 0 1 0;
@@ -136,20 +258,34 @@
     font-size: 18px;
     background: $nav-background-color;
     padding: 12px 8px;
-    margin-bottom: 12px;
     border-bottom: 1px solid $nav-border-color;
+
+    &.sub-nav {
+      font-size: 16px;
+      padding-left: 8%;
+      border-top: 1px solid $nav-border-color;
+
+      &.rando-sub-nav {
+        a:after {
+          border-bottom-color: $kinstone-red-color;
+        }
+      }
+
+      &.save-sub-nav {
+        a:after {
+          border-bottom-color: $kinstone-blue-color;
+        }
+      }
+    }
 
     .link-container {
       flex: auto;
     }
 
-    .locales {
-      font-size: 16px;
-    }
-
     a {
       padding: 4px;
       margin: 0px 4px;
+      cursor: pointer;
 
       // Home link. Get it? LINK? :D
       &.home-link {
@@ -165,12 +301,43 @@
       &:not(.home-link):after {
         content: '';
         display: block;
-        border-bottom: 3px solid $link-main-color--hover;
+        border-bottom: 3px solid $kinstone-green-color;
         width: 0;
         position: absolute;
         left: 0;
         -webkit-transition: 0.4s ease;
         transition: 0.4s ease;
+      }
+
+      &.level-nav {
+        &:hover {
+          color: $kinstone-green-color;
+        }
+      }
+      &.rando-nav {
+        &:hover {
+          color: $kinstone-red-color;
+        }
+        &:after {
+          border-bottom-color: $kinstone-red-color;
+        }
+      }
+      &.save-nav {
+        &:hover {
+          color: $kinstone-blue-color;
+        }
+        &:after {
+          border-bottom-color: $kinstone-blue-color;
+        }
+      }
+      &.discord-social:after {
+        border-bottom-color: #7289DA; // main discord color
+      }
+      &.github-social:after {
+        border-bottom-color: #171516; // main github color
+      }
+      &.twitter-social:after {
+        border-bottom-color: #1da1f2; // main twitter color
       }
 
       &:not(.home-link):hover:after {
@@ -191,14 +358,66 @@
     }
   }
 
+  .social-icons {
+    img {
+      width: 32px;
+      height: 32px;
+    }
+  }
+
   .footer {
     display: flex;
     flex: 0 1 0;
-    justify-content: center;
-    align-items: center;
-    font-size: 14px;
+    font-size: 16px;
     height: 30px;
     background-color: $footer-background-color;
     border-top: 1px solid $footer-border-color;
+
+    .footer-container {
+      height: 160px;
+      display: flex;
+      flex: 100%;
+      flex-flow: row wrap;
+      padding: 16px;
+
+      .locales {
+        flex: 40%;
+
+        .language-select {
+          display: flex;
+          flex: 100%;
+          flex-flow: row wrap;
+
+          a {
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+            margin-right: 12px;
+            font-weight: 600;
+          }
+
+          .flag-icon {
+            font-size: 20px;
+            margin-right: 4px;
+          }
+        }
+
+        .social-icons {
+          padding-top: 20px;
+
+          & > a {
+            padding-right: 16px;
+          }
+        }
+      }
+    }
+
+    .site-map {
+      flex: 60%;
+    }
+  }
+
+  .pull-right {
+    float: right;
   }
 </style>

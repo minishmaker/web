@@ -3,7 +3,9 @@ const i18n = require('./locales');
 require('dotenv').config();
 
 module.exports = {
-  mode: 'universal',
+  env: {
+    GITHUB_TOKEN: process.env.GITHUB_TOKEN,
+  },
 
   env: {
     GITHUB_TOKEN: process.env.GITHUB_TOKEN,
@@ -52,6 +54,7 @@ module.exports = {
     'nuxt-i18n',
     '@nuxtjs/markdownit',
     '@nuxtjs/dotenv',
+    'vue-scrollto/nuxt',
     [
       '@nuxtjs/localforage', {
         name        : 'MinishMaker',
@@ -69,6 +72,11 @@ module.exports = {
   i18n: {
     locales: i18n.locales,
     defaultLocale: 'en',
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'i18n_redirected',
+      onlyOnRoot: true,
+    },
     vueI18n: {
       fallbackLocale: 'en',
       messages: i18n.messages,
@@ -89,16 +97,5 @@ module.exports = {
     /*
     ** You can extend webpack config here
     */
-    extend(config, ctx) {
-      // Run ESLint on save
-      if (ctx.isDev && ctx.isClient) {
-        config.module.rules.push({
-          enforce: 'pre',
-          test: /\.(js|vue)$/,
-          loader: 'eslint-loader',
-          exclude: /(node_modules)/,
-        });
-      }
-    },
   },
 };
