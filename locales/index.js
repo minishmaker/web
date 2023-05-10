@@ -3,7 +3,7 @@ module.exports = {
   messages: {
     en: require('./en-us.js'),
   },
-  locales: ['en'],
-  localeLabels: ['English'],
-  localFlagCodes: ['us'],
+  locales: ['en', 'de'],
+  localeLabels: ['English', 'Deustche'],
+  localFlagCodes: ['en_us', 'de_de'],
 };
