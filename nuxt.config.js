@@ -7,6 +7,10 @@ module.exports = {
     GITHUB_TOKEN: process.env.GITHUB_TOKEN,
   },
 
+  env: {
+    GITHUB_TOKEN: process.env.GITHUB_TOKEN,
+  },
+
   /*
   ** Headers of the page
   */
